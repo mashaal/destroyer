@@ -1,0 +1,53 @@
+#playbar {
+  position: fixed;
+  bottom: 0;
+  height: 85px;
+  z-index: 8;
+  user-select: none;
+  width: 100%;
+  transition: all .666s;
+  &.hide {
+    opacity: 0;
+    bottom: -3em;
+    pointer-events: none;
+  }
+  & .panel {
+    height: 45px;
+    width: 100%;
+    position: relative;
+    text-align: center;
+    top: 40px;
+    border-top: 2px solid #212121;
+    background: rgba(33,33,33,.666);
+    line-height: 40px;
+    font-size: 1.5em;
+    font-weight: 200;
+    font-style:italic;
+    & span {
+      display: inline-block;
+      padding: 0 0em 1em;
+      width: 200px;
+      cursor: pointer;
+      &:hover {
+        background: radial-gradient(rgba(99, 76, 210, 0.8), rgba(99, 76, 210, 0.7))
+      }
+    }
+  }
+  & .range,
+  & .buffer {
+    width: 100vw;
+    transition: transform .125s;
+    position: absolute;
+    transform: translateX(-100%)
+  }
+  & .range {
+    height: 40px;
+    top: 0;
+    background: rgba(99, 76, 210, 0.8);
+  }
+  & .buffer {
+    height: 6px;
+    top: 17px;
+    background: rgba(99, 76, 210, 0.8);
+  }
+}

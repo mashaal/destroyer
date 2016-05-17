@@ -1,0 +1,47 @@
+<html>
+  <head>
+    <title>DESTROYER</title>
+    <script src='../aurora/aurora.js'></script>
+    <script src='../aurora/flac.js'></script>
+    <script src='../aurora/mp3.js'></script>
+    <script src='../aurora/aac.js'></script>
+    <script src='../aurora/alac.js'></script>
+    <link rel='stylesheet' type='text/css' href='../../bundle/destroyer.css'>
+
+  </head>
+  <body>
+    <div id='loading'><span></span></div>
+    <form class='admin' novalidate>
+      <div class='container'>
+        <label>Access Key Id</label>
+        <input type='password' required name='key'></input>
+        <label>Secret Access Key</label>
+        <input type='password' required name='secret'></input>
+        <label>Bucket</label>
+        <input type='text' required name='bucket'></input>
+        <button type='submit'>Connect</button>
+      </div>
+    </form>
+    <figure>
+      <div>
+        <h1>&nbsp;</h1>
+        <h2>&nbsp;</h2>
+        <h3>&nbsp;</h3>
+        <h4>&nbsp;</h4>
+      </div>
+    </figure>
+    <div id='showcase'>
+      <div class='container'>
+        <div class='album'></div>
+      </div>
+      <ol></ol>
+    </div>
+    <ul></ul>
+    <div id='playbar' class='hide'>
+      <div class='range'></div>
+      <div class='buffer'></div>
+      <div class='panel'><span class='previous'>previous</span><span class='play'>play</span><span class='next'>next</span></div>
+    </div>
+    <script src='../../bundle/destroyer.js'></script>
+  </body>
+</html>

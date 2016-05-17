@@ -1,0 +1,29 @@
+#loading {
+  opacity: 0;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(99, 76, 210, .8);
+  position: fixed;
+  pointer-events: none;
+  z-index: 99;
+  transition: all .666s;
+  background-size: 666px 666px;
+  background-position: 0 0;
+  animation: scroll 6s linear infinite;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2em;
+  &.loading {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  &.error {
+    background: rgba(210, 76, 76, 0.85);
+    opacity: 1;
+  }
+  & span {
+    display: inline-block;
+    text-align: center;
+  }
+}
