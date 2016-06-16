@@ -14,7 +14,9 @@ export default class S3 {
     this.covers = []
   }
   uploadFiles (blob, album) {
-    this.connection.upload({Bucket: this.bucket, Key: album + '/cover.jpg',  Body: blob}, function (err, data) {})
+    this.connection.upload({Bucket: this.bucket, Key: album + '/cover.jpg', Body: blob}, (error, data) => {
+      if (error) this.loading.show(error, true)
+    })
   }
   getFiles (bucket, marker) {
     this.loading('connecting to s3')
@@ -27,10 +29,10 @@ export default class S3 {
       if (error) this.loading(error, true)
       else this.connected()
       data.Contents.forEach((file) => {
-        if (['flac', 'm4a', 'mp3', 'mp4', 'aac'].indexOf(file.Key.split('.').pop()) > -1) this.tracks.push(file.Key)
+        if (['flac', 'm4a', 'mp3', 'mp4', 'aac'].indexOf(file.Key.split('.').pop()) > -1) this.tracks.push(file)
         if (file.Key.split('/').pop() === 'cover.jpg') this.covers.push(file.Key)
       })
-      if (data.Contents.length >= 1000) this.getFiles(bucket, this.tracks[this.tracks.length - 1])
+      if (data.Contents.length >= 1000) this.getFiles(bucket, this.tracks[this.tracks.length - 1].Key)
       else this.populateLibrary(this.tracks, this.covers)
     })
   }

@@ -1,3 +1,4 @@
+import dom4 from 'dom4'
 import domready from 'domready'
 import Destroyer from '../destroyer'
 import Admin from '../admin'
@@ -85,6 +86,12 @@ domready(() => {
     preferences: () => {
       destroyer.admin.show()
       destroyer.showcase.close()
+    },
+    alphabetically: () => {
+      destroyer.library.sortAlphabetically()
+    },
+    newest: () => {
+      destroyer.library.sortNewest()
     }
   })
 

@@ -32,7 +32,7 @@ export default class Showcase {
     tracks.forEach((track) => {
       let pointer = document.createElement('li')
       pointer.setAttribute('data-track', track)
-      pointer.innerText = track.split('/')[1]
+      pointer.innerText = track.Key.split('/')[1]
       this.list.appendChild(pointer)
       pointer.addEventListener('click', () => {
         this.playTrack(track)

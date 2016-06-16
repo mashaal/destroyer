@@ -17,20 +17,20 @@ export default class Destroyer {
     this.current = index
     if (this.ch1.playing) this.ch1.stop()
     if (this.ch2.playing) this.ch2.stop()
-    this.loading.show(this.library.tracks[index])
+    this.loading.show(this.library.tracks[index].Key)
     this.feature.hide()
     this.playbar.hide()
-    this.s3.connection.headObject({Bucket: this.s3.bucket, Key: this.library.tracks[index]}, (error, data) => {
+    this.s3.connection.headObject({Bucket: this.s3.bucket, Key: this.library.tracks[index].Key}, (error, data) => {
       if (error) this.loading.show(error, true)
       else {
         let length = data.ContentLength
-        this.ch1 = AV.Player.fromURL(this.s3.connection.getSignedUrl('getObject', {Bucket: this.s3.bucket, Key: this.library.tracks[index]}), length)
+        this.ch1 = AV.Player.fromURL(this.s3.connection.getSignedUrl('getObject', {Bucket: this.s3.bucket, Key: this.library.tracks[index].Key}), length)
         this.ch1.preload()
-        this.s3.connection.headObject({Bucket: this.s3.bucket, Key: this.library.tracks[Number(index) + 1]}, (error, data) => {
+        this.s3.connection.headObject({Bucket: this.s3.bucket, Key: this.library.tracks[Number(index) + 1].Key}, (error, data) => {
           if (error) this.loading.show(error, true)
           else {
             let length = data.ContentLength
-            this.ch2 = AV.Player.fromURL(this.s3.connection.getSignedUrl('getObject', {Bucket: this.s3.bucket, Key: this.library.tracks[Number(index) + 1]}), length)
+            this.ch2 = AV.Player.fromURL(this.s3.connection.getSignedUrl('getObject', {Bucket: this.s3.bucket, Key: this.library.tracks[Number(index) + 1].Key}), length)
             this.play(this.ch1, this.ch2, index)
           }
         })
@@ -41,20 +41,20 @@ export default class Destroyer {
     this.current = index
     this.active = !this.active
     if (!this.active) {
-      this.s3.connection.headObject({Bucket: this.s3.bucket, Key: this.library.tracks[Number(index) + 1]}, (error, data) => {
+      this.s3.connection.headObject({Bucket: this.s3.bucket, Key: this.library.tracks[Number(index) + 1].Key}, (error, data) => {
         if (error) this.loading.show(error, true)
         else {
           let length = data.ContentLength
-          this.ch1 = AV.Player.fromURL(this.s3.connection.getSignedUrl('getObject', {Bucket: this.s3.bucket, Key: this.library.tracks[Number(index) + 1]}), length)
+          this.ch1 = AV.Player.fromURL(this.s3.connection.getSignedUrl('getObject', {Bucket: this.s3.bucket, Key: this.library.tracks[Number(index) + 1].Key}), length)
           this.play(this.ch2, this.ch1, index)
         }
       })
     } else {
-      this.s3.connection.headObject({Bucket: this.s3.bucket, Key: this.library.tracks[Number(index) + 1]}, (error, data) => {
+      this.s3.connection.headObject({Bucket: this.s3.bucket, Key: this.library.tracks[Number(index) + 1].Key}, (error, data) => {
         if (error) this.loading.show(error, true)
         else {
           let length = data.ContentLength
-          this.ch2 = AV.Player.fromURL(this.s3.connection.getSignedUrl('getObject', {Bucket: this.s3.bucket, Key: this.library.tracks[Number(index) + 1]}), length)
+          this.ch2 = AV.Player.fromURL(this.s3.connection.getSignedUrl('getObject', {Bucket: this.s3.bucket, Key: this.library.tracks[Number(index) + 1].Key}), length)
           this.play(this.ch1, this.ch1, index)
         }
       })

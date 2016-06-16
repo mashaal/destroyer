@@ -1,4 +1,5 @@
 import Drag from '../drag'
+import moment from 'moment'
 
 export default class Library {
   constructor (options) {
@@ -21,8 +22,11 @@ export default class Library {
   }
   parseAlbums (tracks) {
     tracks.forEach((track) => {
-      let title = track.split('/')[0]
-      if (this.albums.indexOf(title) === -1) this.albums.push(title)
+      let title = track.Key.split('/')[0]
+      let time = moment(track.LastModified).unix()
+      let find = this.albums.filter(album => album.title === title)
+      if (find.length <= 0) this.albums.push({title: title, time: time})
+      else if (find[0].time < time) find[0].time = time
     })
     this.showAlbums(this.albums)
   }
@@ -32,27 +36,28 @@ export default class Library {
       let pointer = document.createElement('li')
       let cover = document.createElement('div')
       let title = document.createElement('span')
-      pointer.dataset.album = album
-      cover.dataset.album = album
-      title.dataset.album = album
+      pointer.dataset.album = album.title
+      pointer.dataset.time = album.time
+      cover.dataset.album = album.title
+      title.dataset.album = album.title
       new Drag({
         element: cover,
         uploadCover: this.uploadCover
       })
-      let checkCover = this.covers.indexOf(album + '/cover.jpg')
+      let checkCover = this.covers.indexOf(album.title + '/cover.jpg')
       if (checkCover > -1) cover.dataset.image = this.covers[checkCover]
       else cover.dataset.image = ''
-      title.innerText = album
+      title.innerText = album.title
       pointer.appendChild(cover)
       pointer.appendChild(title)
       this.element.appendChild(pointer)
       pointer.addEventListener('click', (event) => {
         let tracks = []
         this.tracks.forEach((track) => {
-          if (track.split('/')[0] === album) tracks.push(track)
+          if (track.Key.split('/')[0] === album.title) tracks.push(track)
         })
         let url = ''
-        let checkCover = this.covers.indexOf(album + '/cover.jpg')
+        let checkCover = this.covers.indexOf(album.title + '/cover.jpg')
         if (checkCover > -1) url = this.getCover(checkCover)
         this.showcase(event.target.dataset.album, url, tracks)
       })
@@ -69,6 +74,7 @@ export default class Library {
       this.element.appendChild(document.createElement('li'))
       i++
     }
+    if (localStorage.getItem('order') === 'new') this.sortNewest()
   }
   static isInViewport (element) {
     var rect = element.getBoundingClientRect()
@@ -87,5 +93,19 @@ export default class Library {
       cover.style.backgroundImage = 'url("' + url + '")'
       this.element.removeEventListener('scroll', listener, false)
     }
+  }
+  sortAlphabetically () {
+    this.element.style.flexDirection = 'row'
+    this.element.queryAll('li').forEach((album) => {
+      album.style.order = 0
+    })
+    localStorage.setItem('order', 'abc')
+  }
+  sortNewest () {
+    this.element.style.flexDirection = 'row-reverse'
+    this.element.queryAll('li').forEach((album) => {
+      album.style.order = album.dataset.time * -1
+    })
+    localStorage.setItem('order', 'new')
   }
 }

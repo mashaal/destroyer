@@ -3750,7 +3750,6 @@ HTTPSource = (function(_super) {
   __extends(HTTPSource, _super);
 
   function HTTPSource(url, length) {
-    console.log(url,length);
     this.url = url;
     this.length = length;
     this.chunkSize = 1 << 20;

@@ -33,18 +33,32 @@ export default class MainMenu {
         label: 'View',
         submenu: [
           {
+            label: 'Sort Alphabeticaly',
+            click () {
+              options.alphabetically()
+            }
+          },
+          {
+            label: 'Sort Newest',
+            click () {
+              options.newest()
+            }
+          },
+          {
+            type: 'separator'
+          },
+          {
             label: 'Reload',
             accelerator: 'CmdOrCtrl+R',
-            click(item, focusedWindow) {
+            click (item, focusedWindow) {
               if (focusedWindow) focusedWindow.reload()
             }
           },
           {
             label: 'Toggle Full Screen',
             accelerator: process.platform === 'darwin' ? 'Ctrl+Command+F' : 'F11',
-            click(item, focusedWindow) {
-              if (focusedWindow)
-                focusedWindow.setFullScreen(!focusedWindow.isFullScreen())
+            click (item, focusedWindow) {
+              if (focusedWindow) focusedWindow.setFullScreen(!focusedWindow.isFullScreen())
             }
           }
         ]
@@ -68,19 +82,19 @@ export default class MainMenu {
     ]
     if (process.platform === 'darwin') {
       this.template.unshift({
-        label: name,
+        label: 'Destroyer',
         submenu: [
           {
             label: 'Preferences...',
             accelerator: 'Command+,',
-            click() {
+            click () {
               options.preferences()
             }
           },
           {
             label: 'Quit',
             accelerator: 'Command+Q',
-            click() {
+            click () {
               remote.app.quit()
             }
           }
