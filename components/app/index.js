@@ -67,7 +67,7 @@ domready(() => {
     showcase: new Showcase({
       playAlbum: (album) => {
         destroyer.library.tracks.some((track) => {
-          if (album === track.split('/')[0]) {
+          if (album === track.Key.split('/')[0]) {
             let index = destroyer.library.tracks.indexOf(track)
             destroyer.fresh(index)
             return true
