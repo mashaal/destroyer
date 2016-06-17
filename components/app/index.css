@@ -1,10 +1,10 @@
 @import '../admin';
+@import '../search';
 @import '../feature';
 @import '../library';
 @import '../loading';
 @import '../playbar';
 @import '../showcase';
-
 
 @font-face {
   font-family: 'averia-serif';

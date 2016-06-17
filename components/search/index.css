@@ -1,0 +1,41 @@
+.search {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .666s;
+  z-index: 99;
+  width: 100vw;
+  position: fixed;
+  text-align: left;
+  &.show {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  & input {
+    display: block;
+    width: 100%;
+    appearance: none;
+    border: none;
+    box-shadow: none;
+    outline: none;
+    font-family: 'AveriaSerif-Light';
+    padding: .5em 1em;
+    padding: 1em;
+    font-size: 2em;
+    margin-bottom: 1em;
+    transition: border .666s;
+    color: white;
+    background: rgba(99, 76, 210, .8);
+  }
+  & .x {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 1em;
+    font-size: 2em;
+    cursor: pointer;
+    color: white;
+    &:hover {
+      color: red;
+    }
+  }
+}

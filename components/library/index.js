@@ -1,5 +1,6 @@
 import Drag from '../drag'
 import moment from 'moment'
+import Search from '../search'
 
 export default class Library {
   constructor (options) {
@@ -75,6 +76,31 @@ export default class Library {
       i++
     }
     if (localStorage.getItem('order') === 'new') this.sortNewest()
+    this.search()
+  }
+  search () {
+    this.search = new Search({
+      albums: this.albums,
+      filter: (albums) => {
+        this.filter(albums)
+      },
+      reset: () => {
+        this.reset()
+      }
+    })
+  }
+  reset () {
+    this.element.queryAll('li').forEach((album) => {
+      if (album.dataset.album) album.style.display = 'block'
+    })
+  }
+  filter (albums, reset) {
+    this.element.queryAll('li').forEach((album) => {
+      if (album.dataset.album) album.style.display = 'none'
+    })
+    albums.forEach((album) => {
+      this.element.querySelector('[data-album="' + album.title + '"]').style.display = 'block'
+    })
   }
   static isInViewport (element) {
     var rect = element.getBoundingClientRect()
@@ -95,17 +121,16 @@ export default class Library {
     }
   }
   sortAlphabetically () {
-    this.element.style.flexDirection = 'row'
     this.element.queryAll('li').forEach((album) => {
       album.style.order = 0
     })
     localStorage.setItem('order', 'abc')
   }
   sortNewest () {
-    this.element.style.flexDirection = 'row-reverse'
     this.element.queryAll('li').forEach((album) => {
       album.style.order = album.dataset.time * -1
     })
     localStorage.setItem('order', 'new')
   }
+
 }
