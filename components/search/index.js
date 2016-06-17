@@ -1,4 +1,5 @@
 import FuzzySearch from 'fuzzy-search'
+import key from 'key'
 
 export default class Search {
   constructor (options) {
@@ -16,23 +17,13 @@ export default class Search {
     })
     window.addEventListener('keydown', (event) => {
       if (document.querySelector('.admin').classList.contains('show')) return
-      if (event.keyCode === 27 || this.input.value === '') this.reset()
-      if ((57 >= event.keyCode && event.keyCode >= 48)
-        || (105 >= event.keyCode && event.keyCode >= 96)
-        || (90 >= event.keyCode && event.keyCode >= 65)
-        || (40 >= event.keyCode && event.keyCode >= 37)
-        || (event.keyCode === 8) || (event.keyCode === 46)
-        || (event.keyCode === 13) || (event.keyCode === 32)) {
+      if (event.keyCode === 27) this.reset()
+      if (key.is(key.code.alnum, event.which)) {
         this.show()
       }
     })
     window.addEventListener('keyup', (event) => {
-      if ((57 >= event.keyCode && event.keyCode >= 48)
-        || (105 >= event.keyCode && event.keyCode >= 96)
-        || (90 >= event.keyCode && event.keyCode >= 65)
-        || (40 >= event.keyCode && event.keyCode >= 37)
-        || (event.keyCode === 8) || (event.keyCode === 46)
-        || (event.keyCode === 13) || (event.keyCode === 32)) {
+      if (key.is(key.code.alnum, event.which) || event.keyCode === 8) {
         let albums = this.fuzzy.search(this.input.value)
         this.filter(albums)
       }
