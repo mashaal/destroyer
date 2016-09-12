@@ -1,0 +1,4 @@
+bundle
+node_modules
+*/.DS_Store
+Destroyer-darwin-x64
