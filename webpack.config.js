@@ -17,7 +17,10 @@ const config = {
     loaders: [{
       test: /\.(js|jsx)$/,
       exclude: /node_modules/,
-      loaders: ['react-hot', 'babel']
+      loader: 'babel',
+      query: {
+        cacheDirectory: true
+      }
     }, {
       test: /\.(svg|png|jpg|webm|mp4|woff|woff2)$/,
       loader: 'url-loader'
