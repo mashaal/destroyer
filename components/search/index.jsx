@@ -83,6 +83,7 @@ const styles = {
   },
   hide: {
     opacity: 0,
-    transform: 'translateY(-3em)'
+    transform: 'translateY(-3em)',
+    pointerEvents: 'none'
   }
 }
