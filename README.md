@@ -40,4 +40,11 @@
 
 ## Protips
 
+* Type anywhere in the library view to search!
 * Having clean and consistent metadata will ensure best experience.
+
+## Future?
+
+* Builds for Windows and Linux.
+* Code cleanup & documenation.
+* Seeking functionality in Playbar.
