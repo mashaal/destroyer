@@ -5,23 +5,39 @@ import Radium from 'radium'
 
 @Radium
 export default class Admin extends Component {
+  constructor () {
+    super()
+    this.state = {
+      dragging: false,
+      mouse: true
+    }
+  }
   componentDidMount () {
     this.local = new Local()
-    if (localStorage.getItem('active') === 'local') this.local.scan(localStorage.getItem('local'))
+    if (localStorage.getItem('local')) this.local.scan(localStorage.getItem('local'))
     else store.dispatch({type: 'ADMIN'})
+    window.addEventListener('dragenter', () => {
+      store.dispatch({type: 'ADMIN'})
+    })
+    window.addEventListener('dragleave', () => {
+      store.dispatch({type: 'DROP'})
+    })
   }
   handleDragEnter = event => {
     this.setState({dragging: true})
   }
-
+  handleMouseOver = event => {
+    this.setState({mouse: true})
+  }
   handleDragOver = event => {
     event.preventDefault()
   }
-
+  handleMouseOut = event => {
+    this.setState({mouse: false})
+  }
   handleDragLeave = event => {
     this.setState({dragging: false})
   }
-
   handleDrop = event => {
     event.preventDefault()
     this.setState({dragging: false})
@@ -33,7 +49,7 @@ export default class Admin extends Component {
   }
   render () {
     return (
-      <figure style={[styles.drop, this.props.admin.display ? styles.show : styles.hide]} onDragEnter={this.handleDragEnter} onDragOver={this.handleDragOver} onDragLeave={this.handleDragLeave} onDrop={this.handleDrop}>
+      <figure style={[styles.drop, this.props.admin.display || this.state.dragging ? styles.show : styles.hide]} onMouseOver={this.handleMouseOver} onMouseOut={this.handleMouseOut} onDragEnter={this.handleDragEnter} onDragOver={this.handleDragOver} onDragLeave={this.handleDragLeave} onDrop={this.handleDrop}>
         <span style={styles.span}>Drop music collection here</span>
       </figure>
     )
@@ -58,14 +74,15 @@ const styles = {
   span: {
     margin: 'auto',
     fontSize: '2em',
-    borderBottom: '2px solid white'
+    borderBottom: '2px solid white',
+    pointerEvents: 'none'
   },
   show: {
     pointerEvents: 'auto',
     opacity: 1
   },
   hide: {
-    pointerEvents: 'none',
-    opacity: 0
+    opacity: 0,
+    pointerEvents: 'none'
   }
 }
