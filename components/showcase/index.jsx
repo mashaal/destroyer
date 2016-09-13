@@ -16,7 +16,7 @@ export default class Showcase extends Component {
   }
   render () {
     let cover = ''
-    if (this.props.showcase.album.cover) cover = {backgroundImage: 'url(' + encodeURI(this.props.showcase.album.cover) + ')'}
+    if (this.props.showcase.album.cover) cover = {backgroundImage: 'url("' + this.props.showcase.album.cover + '")'}
     return (
       <section style={[styles.showcase, this.props.showcase.display ? styles.show : styles.hide]}>
         <figure style={[styles.figure, this.props.showcase.display ? styles.top : styles.bottom]} onClick={this.handleClick}>
