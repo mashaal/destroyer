@@ -1,16 +1,17 @@
 {
   "name": "destroyer",
   "version": "0.2.0",
-  "description": "lossless, streaming, audio player",
+  "description": "lossless audio player",
   "main": "index.js",
   "scripts": {
     "lint:js": "eslint . --ignore-pattern bundle || true",
     "clean": "rm -r bundle || true",
     "prebuild": "npm run clean",
-    "build": "webpack -p --progress",
+    "build": "NODE_ENV=development webpack --progress",
     "build:watch": "npm run build -- --watch",
     "start": "electron index.js",
-    "pack:osx": "rm -rf Destroyer-darwin-x64 && webpack --progress -p && electron-packager ./ Destroyer --platform=darwin --arch=x64 --icon=icons.icns --prune"
+    "pack:osx": "rm -rf Destroyer-darwin-x64 && NODE_ENV=production webpack --progress -p && electron-packager ./ Destroyer --platform=darwin --arch=x64 --icon=icons.icns --prune",
+    "pack:windows": "rm -rf Destroyer-win32-x64 && webpack --progress -p && electron-packager ./ Destroyer --platform=win32 --arch=x64 --icon=icons.icns --prune"
   },
   "author": "omar mashaal",
   "license": "ISC",
