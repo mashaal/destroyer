@@ -14,7 +14,7 @@ export default class Admin extends Component {
   }
   componentDidMount () {
     this.local = new Local()
-    if (localStorage.getItem('local')) this.local.scan(localStorage.getItem('local'))
+    if (localStorage.getItem('fileList')) this.local.collection(JSON.parse(localStorage.getItem('fileList')))
     else store.dispatch({type: 'ADMIN'})
     window.addEventListener('dragenter', () => {
       store.dispatch({type: 'ADMIN'})
@@ -42,8 +42,7 @@ export default class Admin extends Component {
     event.preventDefault()
     this.setState({dragging: false})
     if (event.dataTransfer.files.length > 0) {
-      const file = event.dataTransfer.files[0]
-      this.local.scan(file.path)
+      this.local.collection(event.dataTransfer.files)
       store.dispatch({type: 'DROP'})
     }
   }
