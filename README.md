@@ -37,11 +37,15 @@
 
 ```
 
-
 ## Protips
 
 * Type anywhere in the library view to search!
 * Having clean and consistent metadata will ensure best experience.
+
+## [Currently Known Issues](https://github.com/mashaal/destroyer/issues)
+
+* Importing files with inconsistent metadata has unintended, mysterious results. This needs to be handled more clearly.
+* Reports of static/clicking sounds during playback.
 
 ## Future?
 
