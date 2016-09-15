@@ -93,7 +93,7 @@ const styles = {
     height: 'calc(50vh - 100px)',
     margin: 0,
     padding: '0 0 100px',
-    transition: '1s',
+    transitionDuration: '1s',
     transitionDelay: '.5s',
     background: 'rgba(33, 33, 33, .75)',
     opacity: 0,

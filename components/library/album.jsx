@@ -79,7 +79,7 @@ const styles = {
     border: '2px solid rgba(92, 67, 232, .8)'
   },
   nonfade: {
-    transition: '.5s',
+    transitionDuration: '.5s',
     transitionDelay: '.25s'
   },
   fade: {
