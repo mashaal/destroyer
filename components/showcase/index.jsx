@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import Radium, { keyframes } from 'radium'
 import { store } from '../../client.js'
 import Track from './track.jsx'
-import close from './close.svg'
-import play from './play.svg'
+import close from './close.png'
+import play from './play.png'
 
 @Radium
 export default class Showcase extends Component {
@@ -23,8 +23,7 @@ export default class Showcase extends Component {
           <article style={[styles.article, cover]}></article>
         </figure>
         <ol style={[styles.ol, this.props.showcase.display ? styles.slide : '']}>
-          {this.props.showcase.tracks.map(track => <Track track={track} key={track.Key} />
-           )}
+          {this.props.showcase.tracks.map(track => <Track track={track} key={track.title} />)}
         </ol>
       </section>
     )
@@ -56,7 +55,7 @@ const styles = {
   figure: {
     width: '100vw',
     transition: 'transform 1s',
-    cursor: 'url(' + close + ') 32 32, auto',
+    cursor: 'url(' + close + ') 32 32, alias',
     perspective: '100vw',
     position: 'absolute',
     margin: 0,
@@ -79,7 +78,7 @@ const styles = {
     backgroundColor: 'rgba(33, 33, 33, 1)',
     backgroundPosition: 'center center',
     height: '66vh',
-    cursor: 'url(' + play + ') 32 32, auto',
+    cursor: 'url(' + play + ') 32 32, pointer',
     perspective: 500,
     animation: 'x 5s infinite alternate ease-in-out',
     animationName: rotateKeyframes
