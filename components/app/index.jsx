@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Loading from '../loading'
 import Admin from '../admin'
+import Bar from '../bar'
 import Search from '../search'
 import Status from '../status'
 import Library from '../library'
@@ -15,6 +16,7 @@ export default class App extends Component {
     return (
       <StyleRoot>
         <Style rules={styles} />
+        <Bar />
         <Admin admin={this.props.admin} />
         <Library library={this.props.library} />
         <Showcase showcase={this.props.showcase} />
