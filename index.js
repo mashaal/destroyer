@@ -16,7 +16,11 @@ function createWindow () {
     height: mainWindowState.height,
     titleBarStyle: 'hidden',
     darkTheme: true,
-    transparent: true
+    transparent: true,
+    webPreferences: {
+      backgroundThrottling: false,
+      offscreen: true
+    }
   })
   mainWindowState.manage(mainWindow)
   mainWindow.loadURL('file://' + __dirname + '/components/app/index.html')
