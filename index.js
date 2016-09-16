@@ -18,8 +18,7 @@ function createWindow () {
     darkTheme: true,
     transparent: true,
     webPreferences: {
-      backgroundThrottling: false,
-      offscreen: true
+      backgroundThrottling: false
     }
   })
   mainWindowState.manage(mainWindow)
