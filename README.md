@@ -56,8 +56,12 @@ If you don't have already, install `aptitude` using `sudo apt-get install aptitu
 4) Enter the cloned repository using `cd destroyer`.  
 5) Install the needed dependency [electron-window-state](https://github.com/mawie81/electron-window-state) by issuing the command `npm install --save electron-window-state` while you are in the cloned Destroyer directory.  
 6) Launch `Destroyer` by typing `electron index.js` while you are inside the cloned Destroyer directory.  
+
+
 Currently a black window with a functional meny will appear. If you use the menu to activate the developer tools the error "Failed to load resource: net::ERR_FILE_NOT_FOUND" for the file
 `destroyer/bundle/destroyer.js`
+
+If you drag a directory containing a correctly lanmed .flac-file you may get the error: ``Failed to clear temp storage: It was determined that certain files are unsafe for access within a Web application, or that too many calls are being made on file resources. SecurityError`` or an error stating there is no permission to access the file.
 
 ## Future?
 
