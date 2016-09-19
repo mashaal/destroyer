@@ -13,21 +13,29 @@ export default class Album extends Component {
       cover: '',
       fade: true
     }
+    this.scrolled = 0
+    this.tick = false
   }
   componentDidMount () {
-    this._mounted = true
     this.album = ReactDOM.findDOMNode(this.refs.album)
     this.container = ReactDOM.findDOMNode(this.props.container)
-    this.container.addEventListener('scroll', this.coverHandler)
+    this.container.addEventListener('scroll', this.handleScroll)
     this.coverHandler()
   }
   componentWillUnmount () {
-    this._mounted = false
-    this.container.removeEventListener('scroll', this.coverHandler)
+    this.container.removeEventListener('scroll', this.handleScroll)
   }
   coverHandler = () => {
+    this.tick = false
     if (inView.is(this.album)) this.setState({cover: this.props.album.cover, fade: false})
-    else this.setState({cover: '', fade: true})
+    else if (!this.state.fade) this.setState({cover: '', fade: true})
+  }
+  handleScroll = () => {
+    if (!this.tick && this.scrolled !== this.container.scrollTop) {
+      this.tick = true
+      this.scrolled = this.container.scrollTop
+      requestAnimationFrame(this.coverHandler)
+    }
   }
   handleClick = () => {
     store.dispatch({type: 'SHOWCASE', album: this.props.album})
@@ -80,10 +88,12 @@ const styles = {
   },
   nonfade: {
     transitionDuration: '.5s',
-    transitionDelay: '.25s'
+    transitionDelay: '.25s',
+    willChange: 'transform'
   },
   fade: {
     opacity: 0,
-    transform: 'scale(.9)'
+    transform: 'scale(.9)',
+    willChange: 'transform'
   }
 }
