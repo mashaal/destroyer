@@ -10,6 +10,8 @@
 * Minimalist design with focus on album artwork.
 * Open-source.
 
+[View Demo Video on YouTube](https://www.youtube.com/watch?v=xqZwJ7lf9h8&feature=youtu.be)
+
 [Download latest version of destroyer](https://github.com/mashaal/destroyer/releases)
 
 ## Getting Started
