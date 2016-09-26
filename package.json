@@ -10,8 +10,9 @@
     "build": "NODE_ENV=development webpack --progress",
     "build:watch": "npm run build -- --watch",
     "start": "electron index.js",
-    "pack:osx": "rm -rf Destroyer-darwin-x64 && NODE_ENV=production webpack --progress -p && electron-packager ./ Destroyer --platform=darwin --arch=x64 --icon=icons.icns --prune",
-    "pack:windows": "rm -rf Destroyer-win32-x64 && webpack --progress -p && electron-packager ./ Destroyer --platform=win32 --arch=x64 --icon=icons.icns --prune"
+    "pack:osx": "rm -rf Destroyer-Mac && NODE_ENV=production webpack --progress -p && electron-packager ./ Destroyer --platform=darwin --arch=x64 --icon=icons.icns --prune",
+    "pack:windows": "rm -rf Destroyer-Windows && NODE_ENV=production webpack --progress -p && electron-packager ./ Destroyer --platform=win32 --arch=x64 --icon=icons.icns --prune",
+    "pack:linux": "rm -rf Destroyer-Linux && NODE_ENV=production webpack --progress -p && electron-packager ./ Destroyer --platform=linux --arch=x64 --icon=icons.icns --prune"
   },
   "author": "omar mashaal",
   "license": "ISC",
