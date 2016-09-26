@@ -1,6 +1,7 @@
 import walk from 'walk'
 import moment from 'moment'
 import { store } from '../../client.js'
+const path = require('path')
 const mm = require('musicmetadata')
 const fs = require('fs')
 const { dialog } = require('electron').remote
@@ -54,12 +55,12 @@ export default class Local {
       let find = this.albums.filter(album => album.title === track.album)
       if (find.length <= 0) {
         let cover = false
-        if (this.covers.indexOf(track.root + '/cover.jpg') >= 0) cover = track.root + '/cover.jpg'
+        if (this.covers.indexOf(path.join(track.root, 'cover.jpg')) >= 0) cover = path.join(track.root, 'cover.jpg')
         this.albums.push({artist: track.artist[0], title: track.album, time: track.time, root: track.album, cover: cover})
       }
       this.albums.sort((a, b) => {
-        if(a.artist < b.artist) return -1
-        if(a.artist > b.artist) return 1
+        if (a.artist < b.artist) return -1
+        if (a.artist > b.artist) return 1
         return 0
       })
     })
