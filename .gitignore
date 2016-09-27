@@ -1,6 +1,6 @@
 bundle
 node_modules
 */.DS_Store
-Destroyer-Mac
-Destroyer-Windows
-Destroyer-Linux
+Destroyer-darwin-x64
+Destroyer-win32-x64
+Destroyer-linux-x64
