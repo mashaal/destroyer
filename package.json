@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "lint:js": "eslint . --ignore-pattern bundle || true",
+    "lint:js:fix": "npm run lint:js -- --fix",
     "clean": "rm -r bundle || true",
     "prebuild": "npm run clean",
     "build": "NODE_ENV=development webpack --progress",
