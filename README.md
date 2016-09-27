@@ -56,7 +56,7 @@
 | `npm run lint:js`     | Lint JS (see `eslintConfig` in `package.json`). |
 | `npm run lint:js:fix` | Lint JS and automatically fix issues.           |
 | `npm run clean`       | Delete `/bundle`.                               |
-| `npm run build`       | Compile JS and CSS to `/bundle`.                |
+| `npm run build`       | Compile JS `/bundle`.                           |
 | `npm run build:watch` | Build project and watch for changes.            |
 | `npm start`           | Start Destroyer.                                |
 | `npm run pack:osx`    | Build for Mac.                                  |
