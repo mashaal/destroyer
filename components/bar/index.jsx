@@ -18,7 +18,7 @@ const styles = {
     top: 0,
     left: 0,
     zIndex: 22,
-    webkitAppRegion: 'drag',
+    WebkitAppRegion: 'drag',
     transition: '.5s',
     ':hover': {
       backgroundColor: 'rgba(92, 67, 232, .8)'

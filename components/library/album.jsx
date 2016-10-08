@@ -17,25 +17,19 @@ export default class Album extends Component {
     this.tick = false
   }
   componentDidMount () {
+    this._mounted = true
     this.album = ReactDOM.findDOMNode(this.refs.album)
     this.container = ReactDOM.findDOMNode(this.props.container)
-    this.container.addEventListener('scroll', this.handleScroll)
+    this.container.addEventListener('scroll', this.coverHandler)
     this.coverHandler()
   }
   componentWillUnmount () {
-    this.container.removeEventListener('scroll', this.handleScroll)
+    this._mounted = false
+    this.container.removeEventListener('scroll', this.coverHandler)
   }
   coverHandler = () => {
-    this.tick = false
     if (inView.is(this.album)) this.setState({cover: this.props.album.cover, fade: false})
-    else if (!this.state.fade) this.setState({cover: '', fade: true})
-  }
-  handleScroll = () => {
-    if (!this.tick && this.scrolled !== this.container.scrollTop) {
-      this.tick = true
-      this.scrolled = this.container.scrollTop
-      requestAnimationFrame(this.coverHandler)
-    }
+    else this.setState({cover: '', fade: true})
   }
   handleClick = () => {
     store.dispatch({type: 'SHOWCASE', album: this.props.album})
