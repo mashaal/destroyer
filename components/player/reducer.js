@@ -1,7 +1,7 @@
 import { store } from '../../client.js'
 import Player from './index.js'
 
-export const playerReducer = (state = {player: new Player()}, action) => {
+export const playerReducer = (state = {}, action) => {
   switch (action.type) {
     case 'PLAY_ALBUM': {
       let matching = []

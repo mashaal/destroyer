@@ -10,7 +10,7 @@ export default class Track extends Component {
     this.handleClick = this.handleClick.bind(this)
   }
   handleClick () {
-    store.getState().player.player.playTrack(this.props.track)
+    window.player.playTrack(this.props.track)
   }
   render () {
     return (

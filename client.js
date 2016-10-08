@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom'
 import App from './components/app'
 import Menu from './components/menu'
 import Keyboard from './components/keyboard'
+import Player from './components/player'
 import { combineReducers, createStore } from 'redux'
 import { adminReducer } from './components/admin/reducer.js'
 import { searchReducer } from './components/search/reducer.js'
@@ -45,3 +46,4 @@ render()
 
 new Menu()
 new Keyboard()
+window.player = new Player()

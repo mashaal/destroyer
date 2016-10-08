@@ -11,7 +11,7 @@ export default class Showcase extends Component {
     super()
   }
   handleClick = event => {
-    if (event.target.tagName === 'ARTICLE') store.getState().player.player.playAlbum(this.props.showcase.album)
+    if (event.target.tagName === 'ARTICLE') window.player.playAlbum(this.props.showcase.album)
     else store.dispatch({type: 'CLOSE_SHOWCASE'})
   }
   render () {
