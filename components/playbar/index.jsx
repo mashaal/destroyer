@@ -5,16 +5,14 @@ import { store } from '../../client.js'
 @Radium
 export default class Playbar extends Component {
   previous = () => {
-    let player = window.player
     let previous = store.getState().player.previous
-    if (previous) player.playTrack(previous)
-    else player.stop()
+    if (previous) window.player.playTrack(previous)
+    else window.player.stop()
   }
   next = () => {
-    let player = window.player
     let next = store.getState().player.next
-    if (next) player.playTrack(next)
-    else player.stop()
+    if (next) window.player.playTrack(next)
+    else window.player.stop()
   }
   toggle = () => {
     window.player.toggle()
