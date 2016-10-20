@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import Radium from 'radium'
 import { store } from '../../client.js'
+import { rafThrottle } from '../utilities'
+import shallowCompare from 'react-addons-shallow-compare'
 import inView from 'in-view'
 
 @Radium
@@ -20,12 +22,16 @@ export default class Album extends Component {
     this._mounted = true
     this.album = ReactDOM.findDOMNode(this.refs.album)
     this.container = ReactDOM.findDOMNode(this.props.container)
-    this.container.addEventListener('scroll', this.coverHandler)
+    this.coverEvent = rafThrottle(this.coverHandler)
+    this.container.addEventListener('scroll', this.coverEvent)
     this.coverHandler()
   }
   componentWillUnmount () {
     this._mounted = false
-    this.container.removeEventListener('scroll', this.coverHandler)
+    this.container.removeEventListener('scroll', this.coverEvent)
+  }
+  shouldComponentUpdate = (nextProps, nextState) => {
+    return shallowCompare(this, nextProps, nextState)
   }
   coverHandler = () => {
     if (inView.is(this.album)) this.setState({cover: this.props.album.cover, fade: false})
