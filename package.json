@@ -1,6 +1,6 @@
 {
   "name": "destroyer",
-  "version": "0.2.2-alpha",
+  "version": "0.2.4-alpha",
   "description": "lossless audio player",
   "main": "index.js",
   "private": true,
