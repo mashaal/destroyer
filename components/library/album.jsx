@@ -12,14 +12,10 @@ export default class Album extends Component {
     super()
     this.state = {
       active: false,
-      cover: '',
       fade: true
     }
-    this.scrolled = 0
-    this.tick = false
   }
   componentDidMount () {
-    this._mounted = true
     this.album = ReactDOM.findDOMNode(this.refs.album)
     this.container = ReactDOM.findDOMNode(this.props.container)
     this.coverEvent = rafThrottle(this.coverHandler)
@@ -27,15 +23,14 @@ export default class Album extends Component {
     this.coverHandler()
   }
   componentWillUnmount () {
-    this._mounted = false
     this.container.removeEventListener('scroll', this.coverEvent)
   }
   shouldComponentUpdate = (nextProps, nextState) => {
     return shallowCompare(this, nextProps, nextState)
   }
   coverHandler = () => {
-    if (inView.is(this.album)) this.setState({cover: this.props.album.cover, fade: false})
-    else this.setState({cover: '', fade: true})
+    if (inView.is(this.album)) this.setState({fade: false})
+    else this.setState({fade: true})
   }
   handleClick = () => {
     store.dispatch({type: 'SHOWCASE', album: this.props.album})
@@ -48,7 +43,7 @@ export default class Album extends Component {
   }
   render () {
     let cover = ''
-    if (this.props.album.cover) cover = {backgroundImage: 'url("' + this.state.cover + '")'}
+    if (this.props.album.cover) cover = {backgroundImage: 'url("' + this.props.album.cover + '")'}
     return (
       <li onClick={this.handleClick} onMouseOver={this.activate} onMouseOut={this.reset} style={[styles.base, store.getState().library.newest ? {order: (this.props.album.time * -1)} : '' ]}>
         <div style={this.state.fade ? styles.fade : styles.nonfade}>
