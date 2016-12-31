@@ -2,7 +2,7 @@
 
 # Destroyer
 
-> Open-Source Lossless Music Player
+> Open-Source Lossless Audio Player
 
 ![image](https://dl.dropboxusercontent.com/u/49075567/destroyer.png)
 
