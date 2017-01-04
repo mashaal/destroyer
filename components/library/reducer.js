@@ -1,5 +1,6 @@
 const path = require('path')
 import { sortTracks, sortAlbums } from '../utilities'
+import { store } from '../../client.js'
 
 export const libraryReducer = (state = {covers: [], tracks: [], albums: [], newest: false}, action) => {
   switch (action.type) {
@@ -18,11 +19,13 @@ export const libraryReducer = (state = {covers: [], tracks: [], albums: [], newe
       break
     }
     case 'SEARCH': {
-      state = {...state, albums: action.albums}
+      let albums = store.getState().search.fuzzy.search(action.input)
+      state = {...state, albums: albums}
       break
     }
-    case 'CLEAR': {
-      state = {...state, albums: action.albums}
+    case 'ESCAPE': {
+      let albums = store.getState().search.fuzzy.search('')
+      state = {...state, albums: albums}
       break
     }
     case 'REMOVE_ARTWORK': {

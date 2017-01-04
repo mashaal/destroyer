@@ -9,7 +9,10 @@ import { store } from '../../client.js'
 export default class Search extends Component {
   constructor () {
     super()
-    this.clear = this.clear.bind(this)
+    this.state = {
+      search: ''
+    }
+    this.handleSearch = this.handleSearch.bind(this)
   }
   shouldComponentUpdate = (nextProps, nextState) => {
     return shallowCompare(this, nextProps, nextState)
@@ -22,28 +25,16 @@ export default class Search extends Component {
         }
       }
     })
-    window.addEventListener('keyup', (event) => {
-      if (!this.props.admin.display && !this.props.metadata.display) {
-        if (key.is(key.code.alnum, event.which) || event.keyCode === 8) {
-          let albums = this.props.search.fuzzy.search(this.refs.search.value)
-          store.dispatch({type: 'SEARCH', input: this.refs.search.value, albums: albums})
-        }
-        if (event.keyCode === 27) {
-          this.clear()
-        }
-      }
-    })
   }
-  clear = () => {
-    this.refs.search.value = ''
-    let albums = this.props.search.fuzzy.search('')
-    store.dispatch({type: 'CLEAR', input: '', albums: albums})
+  handleSearch (event) {
+    event.preventDefault()
+    store.dispatch({type: 'SEARCH', input: event.target.value})
   }
   render () {
     return (
       <form style={[styles.search, this.props.search.display ? styles.show : styles.hide]}>
-        <CloseButton onClick={this.clear} />
-        <input ref='search' type='text' style={styles.input}/>
+        <CloseButton />
+        <input ref='search' type='text' value={this.props.search.input} style={styles.input} onChange={this.handleSearch} />
       </form>
     )
   }
@@ -88,7 +79,6 @@ const styles = {
   },
   hide: {
     opacity: 0,
-    transform: 'translateY(-3em)',
-    pointerEvents: 'none'
+    transform: 'translateY(-5em)'
   }
 }

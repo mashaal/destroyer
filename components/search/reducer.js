@@ -1,9 +1,9 @@
 import FuzzySearch from 'fuzzy-search'
 
-export const searchReducer = (state = {display: false, fuzzy: false}, action) => {
+export const searchReducer = (state = {display: false, fuzzy: false, input: ''}, action) => {
   switch (action.type) {
     case 'SEARCH': {
-      state = {...state, display: true}
+      state = {...state, display: true, input: action.input}
       break
     }
     case 'CONNECTED': {
@@ -12,8 +12,8 @@ export const searchReducer = (state = {display: false, fuzzy: false}, action) =>
       })}
       break
     }
-    case 'CLEAR': {
-      state = {...state, display: false}
+    case 'ESCAPE': {
+      state = {...state, display: false, input: ''}
       break
     }
   }
