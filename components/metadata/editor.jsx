@@ -4,9 +4,11 @@ import Button from '../button'
 import Radium from 'radium'
 import TrackNumbers from './track-numbers.jsx'
 import { store } from '../../client.js'
+import shallowCompare from 'react-addons-shallow-compare'
 const {remote} = require('electron')
 const userData = remote.app.getPath('userData')
 const ffmpeg = require('fluent-ffmpeg')
+
 const fs = require('fs')
 
 @Radium
@@ -43,19 +45,23 @@ export default class Editor extends Component {
       source.on('end', () => {
         fs.unlinkSync(temp)
         store.dispatch({type: 'UPDATE_METADATA', track: this.props.selected, albums: this.props.library.albums, tracks: this.props.library.tracks})
+        this.props.reset()
       })
     })
+  }
+  shouldComponentUpdate = (nextProps, nextState) => {
+    return shallowCompare(this, nextProps, nextState)
   }
   render () {
     return (
       <figure style={[styles.base, this.props.display ? {transform: 'translateX(0)'} : {transform: 'translateX(40vw)'}]}>
         <form style={{margin: 'auto .5em', width: '100%'}} onSubmit={this.handleSubmit}>
-          <Input label='title' value={this.props.selected.title} onChange={this.props.onChange} />
-          <Input label='album' value={this.props.selected.album} onChange={this.props.onChange} />
-          <Input label='artist' value={this.props.selected.artist} onChange={this.props.onChange} />
-          <Input label='year' value={this.props.selected.year} onChange={this.props.onChange} />
-          <TrackNumbers label='track' value={this.props.selected.track} onChange={this.props.onTrack} />
-          <TrackNumbers label='disk' value={this.props.selected.disk} onChange={this.props.onDisk} />
+          <Input label='title' value={this.props.selected.title || ''} onChange={this.props.onChange} />
+          <Input label='album' value={this.props.selected.album || ''} onChange={this.props.onChange} />
+          <Input label='artist' value={this.props.selected.artist || ''} onChange={this.props.onChange} />
+          <Input label='year' value={this.props.selected.year || ''} onChange={this.props.onChange} />
+          <TrackNumbers label='track' value={this.props.selected.track || ''} onChange={this.props.onTrack} />
+          <TrackNumbers label='disk' value={this.props.selected.disk || ''} onChange={this.props.onDisk} />
           <Button type='submit' value='Update' disabled={this.props.disabled || !this.props.selected} />
         </form>
       </figure>

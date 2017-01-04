@@ -10,7 +10,7 @@ const fs = require('fs')
 @Radium
 export default class Metadata extends Component {
   constructor (props) {
-    super ()
+    super()
     this.state = {
       selected: false,
       index: false
@@ -21,6 +21,9 @@ export default class Metadata extends Component {
   }
   select (index) {
     this.setState({selected: this.props.library.tracks[index], index: index})
+  }
+  reset = () => {
+    this.setState({selected: false, index: false})
   }
   handleChange = event => {
     let selected = {...this.state.selected, [event.target.dataset.label]: event.target.value}
@@ -98,7 +101,7 @@ export default class Metadata extends Component {
             ))}
           </div>
         </div>
-        <Editor selected={this.state.selected} display={this.props.metadata.display} disabled={this.props.metadata.disabled} onChange={this.handleChange} onTrack={this.handleTrack} onDisk={this.handleDisk} library={this.props.library} />
+        <Editor selected={this.state.selected} display={this.props.metadata.display} disabled={this.props.metadata.disabled} onChange={this.handleChange} onTrack={this.handleTrack} onDisk={this.handleDisk} library={this.props.library} reset={this.reset} />
       </figure>
     )
   }
