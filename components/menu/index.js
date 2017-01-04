@@ -93,10 +93,17 @@ export default class MainMenu {
         label: 'Destroyer',
         submenu: [
           {
-            label: 'Preferences...',
+            label: 'Add Files...',
             accelerator: 'Command+,',
             click () {
               store.dispatch({type: 'ADMIN'})
+            }
+          },
+          {
+            label: 'Edit Metadata...',
+            accelerator: 'Command+m',
+            click () {
+              store.dispatch({type: 'EDIT_METADATA'})
             }
           },
           {

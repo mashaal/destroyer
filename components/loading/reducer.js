@@ -29,6 +29,14 @@ export const loadingReducer = (state = {display: false, message: '', error: fals
       state = {...state, display: false, message: '', error: false}
       break
     }
+    case 'DISABLE_METADATA': {
+      state = {...state, display: true, message: `Updating: ${action.track.artist} - ${action.track.title}`, error: false}
+      break
+    }
+    case 'UPDATE_METADATA': {
+      state = {...state, display: false, message: ''}
+      break
+    }
   }
   return state
 }

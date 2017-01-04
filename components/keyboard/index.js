@@ -5,7 +5,7 @@ export default class Keyboard {
   constructor () {
     window.addEventListener('keydown', (event) => {
       if (event.keyCode === 27) store.dispatch({type: 'ESCAPE'})
-      if (event.keyCode === 32 && !store.getState().search.display) {
+      if (event.keyCode === 32 && !store.getState().search.display && !store.getState().metadata.display) {
         event.preventDefault()
         window.player.toggle()
       }
