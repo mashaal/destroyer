@@ -2,9 +2,13 @@ const electron = require('electron')
 const app = electron.app
 const BrowserWindow = electron.BrowserWindow
 const windowStateKeeper = require('electron-window-state')
+const ffbinaries = require('ffbinaries')
+const platform = ffbinaries.detectPlatform()
+const fs = require('fs')
+const dest = app.getPath('userData')
 let mainWindow
 
-function createWindow () {
+const createWindow = () => {
   let mainWindowState = windowStateKeeper({
     defaultWidth: 1200,
     defaultHeight: 800
@@ -41,3 +45,40 @@ app.on('activate', () => {
     createWindow()
   }
 })
+
+if (!fs.existsSync(dest + '/hail-satan.txt')) {
+  ffbinaries.downloadFiles(platform, {components: ['ffmpeg'], quiet: true, destination: dest}, () => {
+    fs.writeFile(dest + '/hail-satan.txt', `
+Invoking the majestic throne of Satan...
+                              ...
+           s,                .                    .s
+            ss,              . ..               .ss
+            'SsSs,           ..  .           .sSsS'
+             sSs'sSs,        .   .        .sSs'sSs
+              sSs  'sSs,      ...      .sSs'  sSs
+               sS,    'sSs,         .sSs'    .Ss
+               'Ss       'sSs,   .sSs'       sS'
+      ...       sSs         ' .sSs'         sSs       ...
+     .           sSs       .sSs' ..,       sSs       .
+     . ..         sS,   .sSs'  .  'sSs,   .Ss        . ..
+     ..  .        'Ss .Ss'     .     'sSs. ''        ..  .
+     .   .         sSs '       .        'sSs,        .   .
+      ...      .sS.'sSs        .        .. 'sSs,      ...
+            .sSs'    sS,     .....     .Ss    'sSs,
+         .sSs'       'Ss       .       sS'       'sSs,
+      .sSs'           sSs      .      sSs           'sSs,
+   .sSs'____________________________ sSs ______________'sSs,
+.sSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS'.Ss SSSSSSSSSSSSSSSSSSSSSs,
+                        ...         sS'
+                         sSs       sSs
+                          sSs     sSs
+                           sS,   .Ss
+                           'Ss   sS'
+                            sSs sSs
+                             sSsSs
+                              sSs
+                               s
+complete
+    `)
+  })
+}
