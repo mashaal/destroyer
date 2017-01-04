@@ -16,7 +16,7 @@ export default class Showcase extends Component {
     else store.dispatch({type: 'CLOSE_SHOWCASE'})
   }
   render () {
-    let cover = {backgroundImage: 'radial-gradient(rgb(92, 67, 232), #212121)'}
+    let cover = {backgroundImage: `url(../../library/default.jpg)`}
     if (this.props.showcase.album.cover) cover = {backgroundImage: 'url("' + this.props.showcase.album.cover + '")'}
     return (
       <section style={[styles.showcase, this.props.showcase.display ? styles.show : styles.hide]}>
