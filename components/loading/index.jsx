@@ -1,16 +1,12 @@
-import React, { Component } from 'react'
+import React from 'react'
 import Radium from 'radium'
 
-@Radium
-export default class Loading extends Component {
-  render () {
-    return (
-      <section style={[styles.base, this.props.loading.display ? styles.show : styles.hide]}>
-        <span style={styles.span}>{this.props.loading.message}</span>
-      </section>
-    )
-  }
-}
+const Loading = props =>
+  <section style={[styles.base, props.loading.display ? styles.show : styles.hide]}>
+    <span style={styles.span}>{props.loading.message}</span>
+  </section>
+
+export default Radium(Loading)
 
 const styles = {
   base: {

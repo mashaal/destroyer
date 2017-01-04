@@ -1,14 +1,10 @@
-import React, { Component } from 'react'
+import React from 'react'
 import Radium from 'radium'
 
-@Radium
-export default class Bar extends Component {
-  render () {
-    return (
-      <nav style={styles.base} />
-    )
-  }
-}
+const Bar = () =>
+  <nav style={styles.base} />
+
+export default Radium(Bar)
 
 const styles = {
   base: {

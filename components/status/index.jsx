@@ -1,21 +1,17 @@
-import React, { Component } from 'react'
+import React from 'react'
 import Radium from 'radium'
 
-@Radium
-export default class Status extends Component {
-  render () {
-    return (
-      <figure style={[styles.status, this.props.status.display ? styles.show : styles.hide]}>
-        <div>
-          <h1 style={styles.h1}>{this.props.status.artist}</h1>
-          <h2 style={styles.h2}>{this.props.status.title}</h2>
-          <h3 style={styles.h3}>{this.props.status.album}</h3>
-          <h4 style={styles.h4}>- 00:00:00</h4>
-        </div>
-      </figure>
-    )
-  }
-}
+const Status = props =>
+  <figure style={[styles.status, props.status.display ? styles.show : styles.hide]}>
+    <div>
+      <h1 style={styles.h1}>{props.status.artist}</h1>
+      <h2 style={styles.h2}>{props.status.title}</h2>
+      <h3 style={styles.h3}>{props.status.album}</h3>
+      <h4 style={styles.h4}>- 00:00:00</h4>
+    </div>
+  </figure>
+
+export default Radium(Status)
 
 const styles = {
   status: {
