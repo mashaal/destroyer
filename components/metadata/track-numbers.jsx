@@ -4,7 +4,7 @@ import Radium from 'radium'
 const TrackNumbers = props =>
   <div style={styles.base}>
     <div style={{padding: '0 .5em'}}>
-      <label style={styles.label}>{props.label}</label>
+      <label style={[styles.label, {textTransform: 'capitalize'}]}>{props.label === 'disk' ? 'disc' : props.label}</label>
       <input type={props.type || 'text'} data-label='no' style={styles.input} required={props.required} value={props.value ? props.value.no : ''} onChange={props.onChange} />
     </div>
     <div style={{padding: '0 .5em'}}>
