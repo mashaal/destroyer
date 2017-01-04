@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import key from 'key'
 import Radium from 'radium'
 import shallowCompare from 'react-addons-shallow-compare'
+import CloseButton from '../close-button'
 import { store } from '../../client.js'
 
 @Radium
@@ -41,8 +42,8 @@ export default class Search extends Component {
   render () {
     return (
       <form style={[styles.search, this.props.search.display ? styles.show : styles.hide]}>
+        <CloseButton onClick={this.clear} />
         <input ref='search' type='text' style={styles.input}/>
-        <span ref='close' onClick={this.clear} style={styles.span}></span>
       </form>
     )
   }
@@ -52,7 +53,7 @@ const styles = {
   search: {
     display: 'block',
     transition: '.25s',
-    zIndex: 99,
+    zIndex: 30,
     width: '100vw',
     position: 'fixed',
     textAlign: 'left'
@@ -64,7 +65,7 @@ const styles = {
     border: 'none',
     boxShadow: 'none',
     outline: 'none',
-    fontFamily: '\'AveriaSerif-Light\'',
+    fontFamily: 'AveriaSerif-Light',
     padding: '1em',
     fontSize: '2em',
     marginBottom: '1em',
