@@ -5,18 +5,14 @@ import { store } from '../../client.js'
 
 @Radium
 export default class Track extends Component {
-  constructor () {
-    super()
-    this.handleClick = this.handleClick.bind(this)
-  }
-  handleClick () {
+  handleClick = () => {
     window.player.playTrack(this.props.track)
   }
   render () {
     return (
       <li style={styles.li} onClick={this.handleClick}>
         <span style={styles.no}>{leftpad(this.props.track.track.no, 2)}</span>
-        <span style={[styles.span, store.getState().player.track === this.props.track ? styles.current : '']}>{this.props.track.title}</span>
+        <span style={[styles.span, this.props.player.track === this.props.track ? styles.current : '']}>{this.props.track.title}</span>
       </li>
     )
   }

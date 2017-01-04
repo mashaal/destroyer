@@ -17,7 +17,7 @@ const styles = {
     position: 'fixed',
     top: 0,
     left: 0,
-    zIndex: 22,
+    zIndex: 100,
     WebkitAppRegion: 'drag',
     transition: '.5s',
     ':hover': {

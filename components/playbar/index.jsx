@@ -1,16 +1,25 @@
 import React, { Component } from 'react'
 import Radium from 'radium'
-import { store } from '../../client.js'
+import ReactDOM from 'react-dom'
+import shallowCompare from 'react-addons-shallow-compare'
+import { rafThrottle } from '../utilities'
 
 @Radium
 export default class Playbar extends Component {
+  shouldComponentUpdate = (nextProps, nextState) => {
+    return shallowCompare(this, nextProps, nextState)
+  }
+  scan = event => {
+    event.preventDefault()
+    window.player.scan(this.percentage)
+  }
   previous = () => {
-    let previous = store.getState().player.previous
+    let previous = this.props.player.previous
     if (previous) window.player.playTrack(previous)
     else window.player.stop()
   }
   next = () => {
-    let next = store.getState().player.next
+    let next = this.props.player.next
     if (next) window.player.playTrack(next)
     else window.player.stop()
   }
@@ -20,9 +29,10 @@ export default class Playbar extends Component {
   render () {
     return (
       <div style={[styles.playbar, this.props.playbar.display ? styles.show : styles.hide]}>
-        <div data-range style={[styles.range, styles.rangeBuffer]}></div>
-        <div data-buffer style={[styles.buffer, styles.rangeBuffer]}></div>
+        <div data-range style={[styles.range, styles.rangeBuffer]} />
+        <div data-buffer style={[styles.buffer, styles.rangeBuffer]} />
         <div style={styles.panel}><span style={styles.span} key='previous' onClick={this.previous}>previous</span><span style={styles.span} key='toggle' onClick={this.toggle}>{this.props.playbar.toggle}</span><span style={styles.span} key='next' onClick={this.next}>next</span></div>
+        <div style={[styles.slider, this.state.hover ? {opacity: 1} : {opacity: 0}]} ref='slider' onClick={this.scan} />
       </div>
     )
   }
@@ -35,7 +45,7 @@ const styles = {
     opacity: 0,
     bottom: 0,
     height: 85,
-    zIndex: 8,
+    zIndex: 10,
     userSelect: 'none',
     width: '100%',
     transition: '.666s'
@@ -72,12 +82,15 @@ const styles = {
   range: {
     height: 40,
     top: 0,
-    background: 'rgba(92, 67, 232, 0.8)'
+    pointerEvents: 'none',
+    background: 'rgba(92, 67, 232, 1)'
   },
   buffer: {
-    height: 6,
-    top: 17,
-    background: 'rgba(92, 67, 232, 0.8)'
+    height: 40,
+    top: 0,
+    background: 'rgba(92, 67, 232, 0.666)',
+    cursor: 'not-allowed',
+    zIndex: 20
   },
   show: {
     transform: 'translateY(0em)',

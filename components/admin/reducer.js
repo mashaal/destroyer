@@ -1,7 +1,7 @@
 export const adminReducer = (state = {display: false}, action) => {
   switch (action.type) {
     case 'ADMIN': {
-      state = {...state, display: true}
+      state = {...state, display: !state.display}
       break
     }
     case 'ESCAPE': {

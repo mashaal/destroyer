@@ -67,7 +67,7 @@ const styles = {
     height: '100vh',
     padding: 0,
     margin: 0,
-    zIndex: 2000,
+    zIndex: 40,
     transition: '.25s'
   },
   span: {

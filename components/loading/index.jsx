@@ -20,7 +20,7 @@ const styles = {
     backgroundColor: 'rgba(92, 67, 232, .8)',
     position: 'fixed',
     pointerEvents: 'none',
-    zIndex: 99,
+    zIndex: 60,
     transition: '.5s',
     alignItems: 'center',
     justifyContent: 'center',

@@ -1,14 +1,15 @@
 import React, { Component } from 'react'
 import Radium, { keyframes } from 'radium'
 import { store } from '../../client.js'
+import shallowCompare from 'react-addons-shallow-compare'
 import Track from './track.jsx'
 import close from './close.png'
 import play from './play.png'
 
 @Radium
 export default class Showcase extends Component {
-  constructor () {
-    super()
+  shouldComponentUpdate = (nextProps, nextState) => {
+    return shallowCompare(this, nextProps, nextState)
   }
   handleClick = event => {
     if (event.target.tagName === 'ARTICLE') window.player.playAlbum(this.props.showcase.album)
@@ -20,10 +21,12 @@ export default class Showcase extends Component {
     return (
       <section style={[styles.showcase, this.props.showcase.display ? styles.show : styles.hide]}>
         <figure style={[styles.figure, this.props.showcase.display ? styles.top : styles.bottom]} onClick={this.handleClick}>
-          <article style={[styles.article, cover]}></article>
+          <article style={[styles.article, cover]} />
         </figure>
         <ol style={[styles.ol, this.props.showcase.display ? styles.slide : '']}>
-          {this.props.showcase.tracks.map(track => <Track track={track} key={track.title} />)}
+          {this.props.showcase.tracks.map((track, index) => {
+            if ((this.props.showcase.album.title === track.album) && (this.props.showcase.album.artist === track.artist)) return (<Track track={track} key={index} player={this.props.player} />)
+          })}
         </ol>
       </section>
     )
