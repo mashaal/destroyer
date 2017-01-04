@@ -16,3 +16,27 @@ export const rafThrottle = callback => {
   throttled.cancel = () => window.cancelAnimationFrame(requestId)
   return throttled
 }
+
+export const sortTracks = tracks => {
+  tracks.sort((a, b) => {
+    if (a.artist < b.artist) return -1
+    if (a.artist > b.artist) return 1
+    if (a.album > b.album) return 1
+    if (a.album < b.album) return -1
+    if (a.track.no > b.track.no) return 1
+    if (a.track.no < b.track.no) return -1
+    return 0
+  })
+  return tracks
+}
+
+export const sortAlbums = albums => {
+  albums.sort((a, b) => {
+    if (a.artist < b.artist) return -1
+    if (a.artist > b.artist) return 1
+    if (a.title > b.title) return 1
+    if (a.title < b.title) return -1
+    return 0
+  })
+  return albums
+}

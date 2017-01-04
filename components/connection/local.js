@@ -1,10 +1,10 @@
 import walk from 'walk'
 import moment from 'moment'
 import { store } from '../../client.js'
+import { sortTracks, sortAlbums } from '../utilities'
 const path = require('path')
 const mm = require('musicmetadata')
 const fs = require('fs')
-const { dialog } = require('electron').remote
 
 export default class Local {
   collection (fileList) {
@@ -18,28 +18,35 @@ export default class Local {
     }
   }
   scan (index) {
-    if (index > this.paths.length - 1) this.end()
-    else {
+    if (index >= this.paths.length) {
+      localStorage.setItem('fileList', JSON.stringify(this.paths))
+      this.end()
+    } else {
       this.directory = walk.walk(this.paths[index].path, {followLinks: false})
       this.directory.on('file', (root, fileStats, next) => {
         let fileName = root + '/' + fileStats.name
         if (['flac', 'm4a', 'mp3', 'mp4', 'aac'].indexOf(fileName.split('.').pop()) > -1) {
           let rs = fs.createReadStream(fileName)
           mm(rs, (error, metadata) => {
-            if (error || !metadata.artist[0] || !metadata.album) next()
-            else {
-              store.dispatch({type: 'SCANNING', message: 'SCANNING: ' + metadata.artist[0] + ' - ' + metadata.album})
+            if (error) {
+              console.log('error', error)
+              next()
+            } else {
+              metadata.artist = metadata.artist[0] || ''
+              metadata.title = metadata.title || ''
+              metadata.album = metadata.album || ''
               metadata.root = root
               metadata.path = fileName
               metadata.time = moment(fileStats.mtime).unix()
               this.tracks.push(metadata)
-              rs.destroy()
+              store.dispatch({type: 'SCANNING', message: 'SCANNING: ' + metadata.artist + ' - ' + metadata.album})
+              rs.close()
             }
           })
           rs.on('close', () => {
             next()
           })
-        } else if (fileStats.name === 'cover.jpg') {
+        } else if (fileStats.name === 'cover.jpg' || fileStats.name === 'Cover.jpg') {
           this.covers.push(fileName)
           next()
         } else next()
@@ -50,20 +57,16 @@ export default class Local {
     }
   }
   end () {
-    localStorage.setItem('fileList', JSON.stringify(this.paths))
-    this.tracks.forEach((track) => {
-      let find = this.albums.filter(album => album.title === track.album)
+    this.tracks.forEach((track, index) => {
+      let find = this.albums.filter(album => (album.title === track.album) && (album.artist === track.artist))
       if (find.length <= 0) {
         let cover = false
         if (this.covers.indexOf(path.join(track.root, 'cover.jpg')) >= 0) cover = path.join(track.root, 'cover.jpg')
-        this.albums.push({artist: track.artist[0], title: track.album, time: track.time, root: track.album, cover: cover})
+        this.albums.push({artist: track.artist, title: track.album, time: track.time, root: track.root, cover: cover})
       }
-      this.albums.sort((a, b) => {
-        if (a.artist < b.artist) return -1
-        if (a.artist > b.artist) return 1
-        return 0
-      })
     })
+    sortAlbums(this.albums)
+    sortTracks(this.tracks)
     store.dispatch({type: 'CONNECTED', tracks: this.tracks, covers: this.covers, albums: this.albums, path: this.paths})
   }
 }
