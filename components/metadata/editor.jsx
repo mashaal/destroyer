@@ -30,16 +30,16 @@ export default class Editor extends Component {
       "-metadata", `disctotal=${this.props.selected.disk.of}`
     )
     .save(temp)
-    .on('error', (err, stdout, stderr) => {
-      console.log('Cannot process metadata: ' + err.message)
+    .on('error', (error, stdout, stderr) => {
+      console.log('Cannot process metadata: ' + error.message)
       fs.unlinkSync(temp)
     })
     .on('end', (stdout, stderr) => {
       let source = fs.createReadStream(temp)
       let dest = fs.createWriteStream(this.props.selected.path)
       source.pipe(dest)
-      source.on('error', function(err) {
-        console.log('Cannot process metadata: ' + err.message)
+      source.on('error', (error) => {
+        console.log('Cannot process metadata: ' + error.message)
         fs.unlinkSync(temp)
       })
       source.on('end', () => {

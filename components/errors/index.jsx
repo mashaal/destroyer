@@ -26,7 +26,7 @@ const rotateKeyframes = keyframes({
 
 const styles = {
   base: {
-    padding: '0em 2em',
+    padding: '1em 2em',
     background: 'rgba(92, 67, 232, .8)',
     marginBottom: '1em',
     fontWeight: 800,
@@ -36,6 +36,9 @@ const styles = {
   icon: {
     color: 'red',
     fontSize: '400%',
+    lineHeight: '1em',
+    width: '1em',
+    textAlign: 'center',
     transformOrigin: '50% 50%',
     animation: 'x .33s infinite alternate ease-in-out',
     animationName: rotateKeyframes
@@ -43,6 +46,9 @@ const styles = {
   mark: {
     color: 'white',
     fontSize: '400%',
+    lineHeight: '1em',
+    width: '1em',
+    textAlign: 'center',
     transformOrigin: '50% 50%',
     animation: 'x .33s infinite alternate ease-in-out',
     animationName: rotateKeyframes
