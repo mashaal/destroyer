@@ -58,4 +58,5 @@
 | `npm run build`       | Compile JS `/bundle`.                           |
 | `npm run build:watch` | Build project and watch for changes.            |
 | `npm start`           | Start Destroyer.                                |
+| `npm run ffmpeg`      | Download FFmpeg binaries.                       |
 | `npm run pack:osx`    | Build for Mac.                                  |
