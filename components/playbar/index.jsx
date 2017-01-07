@@ -29,8 +29,8 @@ export default class Playbar extends Component {
   render () {
     return (
       <div style={[styles.playbar, this.props.playbar.display ? styles.show : styles.hide]}>
-        <div data-range style={[styles.range, styles.rangeBuffer]} />
-        <div data-buffer style={[styles.buffer, styles.rangeBuffer]} />
+        <div data-range style={styles.range} />
+        <div data-buffer style={styles.buffer} />
         <div style={styles.panel}><span style={styles.span} key='previous' onClick={this.previous}>previous</span><span style={styles.span} key='toggle' onClick={this.toggle}>{this.props.playbar.toggle}</span><span style={styles.span} key='next' onClick={this.next}>next</span></div>
         <div style={[styles.slider, this.state.hover ? {opacity: 1} : {opacity: 0}]} ref='slider' onClick={this.scan} />
       </div>
@@ -46,7 +46,7 @@ const styles = {
     bottom: 0,
     height: 85,
     zIndex: 10,
-    userSelect: 'none',
+    WebkitUserSelect: 'none',
     width: '100%',
     transition: '.666s'
   },
@@ -73,21 +73,21 @@ const styles = {
       background: 'rgba(92, 67, 232, .8)'
     }
   },
-  rangeBuffer: {
-    width: '100vw',
-    transition: 'transform .125s',
-    position: 'absolute',
-    transform: 'translateX(-100%)'
-  },
   range: {
     height: 40,
     top: 0,
+    left: 0,
     pointerEvents: 'none',
-    background: 'rgba(92, 67, 232, 1)'
+    background: 'rgba(92, 67, 232, 1)',
+    transition: 'width .25s linear',
+    width: 0,
+    position: 'absolute'
   },
   buffer: {
     height: 40,
+    width: '100vw',
     top: 0,
+    position: 'absolute',
     background: 'rgba(92, 67, 232, 0.666)',
     cursor: 'not-allowed',
     zIndex: 20

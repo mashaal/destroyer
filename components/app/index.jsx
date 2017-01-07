@@ -16,7 +16,7 @@ const App = props =>
     <Bar />
     <Admin admin={props.admin} />
     <Metadata metadata={props.metadata} library={props.library} />
-    <Library library={props.library} />
+    <Library library={props.library} player={props.player} />
     <Showcase showcase={props.showcase} player={props.player} />
     <Status status={props.status} />
     <Loading loading={props.loading} />

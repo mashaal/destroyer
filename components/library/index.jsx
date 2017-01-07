@@ -27,7 +27,7 @@ export default class Library extends Component {
   }
   render () {
     return (
-    <ul ref='library' style={styles.base}>
+    <ul ref='library' style={[styles.base, this.props.player.track ? {padding: '12.5vh 0 33vh'} : {padding: '2em 0 33vh'}]}>
       <div style={{flexBasis: '100%', padding: '0 2em', cursor: 'pointer'}} onClick={()=> store.dispatch({type: 'EDIT_METADATA'})}>
         <Errors errors={this.countErrors()} />
       </div>
@@ -59,9 +59,10 @@ const styles = {
     width: '100vw',
     height: '100vh',
     margin: 0,
-    padding: '12.5vh 0 33vh',
+    WebkitUserSelect: 'none',
     listStyle: 'none',
     overflow: 'scroll',
+    transition: 'padding .5s',
     transform: 'translate3d(0, 0, 0)'
   },
   li: {

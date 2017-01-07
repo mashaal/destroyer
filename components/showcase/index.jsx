@@ -46,6 +46,7 @@ const styles = {
   showcase: {
     display: 'block',
     position: 'fixed',
+    WebkitUserSelect: 'none',
     top: 0,
     left: 0,
     right: 0,

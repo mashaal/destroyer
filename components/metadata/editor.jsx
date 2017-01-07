@@ -15,19 +15,19 @@ const fs = require('fs')
 export default class Editor extends Component {
   handleSubmit = event => {
     event.preventDefault()
-    ffmpeg.setFfmpegPath(userData + '/ffmpeg')
+    ffmpeg.setFfmpegPath(`${userData}/ffmpeg/ffmpeg`)
     store.dispatch({type: 'DISABLE_METADATA', track: this.props.selected})
-    let temp = userData + `/${this.props.selected.path.split("/").pop()}`
+    let temp = userData + `/${this.props.selected.path.split('/').pop()}`
     ffmpeg(this.props.selected.path)
     .outputOptions(
-      "-metadata", `artist=${this.props.selected.artist}`,
-      "-metadata", `album=${this.props.selected.album}`,
-      "-metadata", `title=${this.props.selected.title}`,
-      "-metadata", `date=${this.props.selected.year}`,
-      "-metadata", `track=${this.props.selected.track.no}`,
-      "-metadata", `tracktotal=${this.props.selected.track.of}`,
-      "-metadata", `disk=${this.props.selected.disk.no}`,
-      "-metadata", `disctotal=${this.props.selected.disk.of}`
+      '-metadata', `artist=${this.props.selected.artist}`,
+      '-metadata', `album=${this.props.selected.album}`,
+      '-metadata', `title=${this.props.selected.title}`,
+      '-metadata', `date=${this.props.selected.year}`,
+      '-metadata', `track=${this.props.selected.track.no}`,
+      '-metadata', `tracktotal=${this.props.selected.track.of}`,
+      '-metadata', `disk=${this.props.selected.disk.no}`,
+      '-metadata', `disctotal=${this.props.selected.disk.of}`
     )
     .save(temp)
     .on('error', (error, stdout, stderr) => {

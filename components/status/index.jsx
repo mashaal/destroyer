@@ -18,7 +18,7 @@ const styles = {
     display: 'flex',
     width: '100vw',
     height: 'auto',
-    userSelect: 'none',
+    WebkitUserSelect: 'none',
     padding: '1em 0',
     margin: 0,
     position: 'fixed',
