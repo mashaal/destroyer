@@ -17,7 +17,7 @@ ffbinaries.downloadFiles(platform, {components: ['ffmpeg', 'ffplay', 'ffprobe'],
 
   archive.pipe(output)
   archive.bulk([
-    {expand: true, cwd: './ffmpeg', src: ['**'], dest: '/'}
+    {expand: true, cwd: './ffmpeg', src: ['**'], dest: './'}
   ])
   archive.finalize()
 })
