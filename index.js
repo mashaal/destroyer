@@ -2,11 +2,13 @@ const electron = require('electron')
 const app = electron.app
 const BrowserWindow = electron.BrowserWindow
 const windowStateKeeper = require('electron-window-state')
-const ffbinaries = require('ffbinaries')
-const platform = ffbinaries.detectPlatform()
-const fs = require('fs')
-const dest = app.getPath('userData')
 let mainWindow
+let player
+const spawn = require('child_process').spawn
+const ffmpeg = require('fluent-ffmpeg')
+const fs = require('fs')
+const userData = app.getPath('userData')
+var extract = require('extract-zip')
 
 const createWindow = () => {
   let mainWindowState = windowStateKeeper({
@@ -28,6 +30,7 @@ const createWindow = () => {
   mainWindowState.manage(mainWindow)
   mainWindow.loadURL('file://' + __dirname + '/components/app/index.html')
   mainWindow.on('closed', () => {
+    app.stop()
     mainWindow = null
   })
 }
@@ -36,6 +39,7 @@ app.on('ready', createWindow)
 
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
+    app.stop()
     app.quit()
   }
 })
@@ -46,39 +50,57 @@ app.on('activate', () => {
   }
 })
 
-if (!fs.existsSync(dest + '/hail-satan.txt')) {
-  ffbinaries.downloadFiles(platform, {components: ['ffmpeg'], quiet: true, destination: dest}, () => {
-    fs.writeFile(dest + '/hail-satan.txt', `
-Invoking the majestic throne of Satan...
-                              ...
-           s,                .                    .s
-            ss,              . ..               .ss
-            'SsSs,           ..  .           .sSsS'
-             sSs'sSs,        .   .        .sSs'sSs
-              sSs  'sSs,      ...      .sSs'  sSs
-               sS,    'sSs,         .sSs'    .Ss
-               'Ss       'sSs,   .sSs'       sS'
-      ...       sSs         ' .sSs'         sSs       ...
-     .           sSs       .sSs' ..,       sSs       .
-     . ..         sS,   .sSs'  .  'sSs,   .Ss        . ..
-     ..  .        'Ss .Ss'     .     'sSs. ''        ..  .
-     .   .         sSs '       .        'sSs,        .   .
-      ...      .sS.'sSs        .        .. 'sSs,      ...
-            .sSs'    sS,     .....     .Ss    'sSs,
-         .sSs'       'Ss       .       sS'       'sSs,
-      .sSs'           sSs      .      sSs           'sSs,
-   .sSs'____________________________ sSs ______________'sSs,
-.sSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS'.Ss SSSSSSSSSSSSSSSSSSSSSs,
-                        ...         sS'
-                         sSs       sSs
-                          sSs     sSs
-                           sS,   .Ss
-                           'Ss   sS'
-                            sSs sSs
-                             sSsSs
-                              sSs
-                               s
-complete
-    `)
+app.playTrack = file => {
+  app.stop()
+  player = spawn(`${userData}/ffmpeg/ffplay`, [file.path, '-nodisp', '-autoexit'], {stdio: 'ignore'})
+  ffmpeg.setFfprobePath(`${userData}/ffmpeg/ffprobe`)
+  ffmpeg.ffprobe(file.path, (error, metadata) => {
+    let duration
+    if (error) throw error
+    else if (metadata.format) {
+      duration = metadata.format.duration
+    } else duration = false
+    mainWindow.webContents.executeJavaScript(`window.player.setDuration(${duration})`)
+  })
+  player.on('exit', sss)
+  this.playing = this.cnt = true
+  this.track = file
+}
+
+app.currentTrack = () => this.track
+
+const sss = () => {
+  if (this.cnt) next()
+  else app.stop()
+}
+
+let next = () => mainWindow.webContents.executeJavaScript('window.player.next()')
+
+app.stop = () => {
+  if (player) player.removeListener('exit', sss)
+  if (this.playing) player.kill()
+  player = this.playing = this.cnt = this.track = null
+}
+
+app.pause = () => {
+  this.playing = false
+  mainWindow.webContents.executeJavaScript('window.player.pause()')
+  player.kill('SIGSTOP')
+}
+
+app.resume = () => {
+  this.playing = true
+  mainWindow.webContents.executeJavaScript('window.player.resume()')
+  player.kill('SIGCONT')
+}
+
+app.toggle = () => {
+  if (this.playing) app.pause()
+  else app.resume()
+}
+
+if (!fs.existsSync(`${userData}/ff.txt`)) {
+  extract(__dirname + '/ffmpeg.zip', {dir: userData}, function (err) {
+   fs.writeFile(`${userData}/ff.txt`, '🍑🍆')
   })
 }

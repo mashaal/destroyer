@@ -1,6 +1,6 @@
 {
   "name": "Destroyer",
-  "version": "0.3.0",
+  "version": "1.0.0",
   "description": "Lossless Audio Player",
   "main": "index.js",
   "private": true,
@@ -10,13 +10,15 @@
     "build": "NODE_ENV=development webpack --progress",
     "build:watch": "npm run build -- --watch",
     "start": "electron index.js",
+    "ffmpeg": "node ./ffbinaries.js",
     "pack:osx": "rm -rf Destroyer-darwin-x64 && NODE_ENV=production webpack --progress -p && electron-packager ./ Destroyer --platform=darwin --arch=x64 --icon=icons.icns --prune"
   },
   "author": "omar mashaal",
   "license": "ISC",
   "dependencies": {
+    "date-fns": "^1.23.0",
     "electron-window-state": "^4.0.1",
-    "ffbinaries": "^0.1.2",
+    "extract-zip": "^1.6.0",
     "fluent-ffmpeg": "2.0.1",
     "fuzzy-search": "^1.4.0",
     "in-view": "^0.6.1",
@@ -32,6 +34,7 @@
     "walk": "^2.3.9"
   },
   "devDependencies": {
+    "archiver": "^1.3.0",
     "babel-core": "^6.21.0",
     "babel-eslint": "^7.1.1",
     "babel-loader": "^6.2.10",
@@ -50,6 +53,7 @@
     "eslint-plugin-react": "^6.8.0",
     "eslint-plugin-standard": "^2.0.1",
     "exports-loader": "^0.6.3",
+    "ffbinaries": "^0.1.2",
     "file-loader": "^0.9.0",
     "imports-loader": "^0.7.0",
     "url-loader": "^0.5.7",

@@ -1,59 +1,58 @@
 import { store } from '../../client.js'
-const fs = require('fs')
+import { remote } from 'electron'
+const addSeconds = require('date-fns/add_seconds')
+const differenceInSeconds = require('date-fns/difference_in_seconds')
 
 export default class Player {
-  constructor () {
-    this.ch1 = false
-  }
   playAlbum (album) {
     store.dispatch({type: 'PLAY_ALBUM', album: album})
     this.local(store.getState().player.track)
   }
   playTrack (track) {
     store.dispatch({type: 'PLAY_TRACK', track: track})
-    this.local(store.getState().player.track)
+    this.local(track)
+  }
+  next () {
+    if (store.getState().player.next) this.playTrack(store.getState().player.next)
   }
   stop () {
-    if (this.ch1.playing) this.ch1.stop()
-    if (this.ch1.asset) this.ch1.asset.stop()
+    remote.app.stop()
     store.dispatch({type: 'STOP'})
   }
   toggle () {
-    if (this.ch1.playing) {
-      this.ch1.pause()
-      store.dispatch({type: 'PAUSE'})
-    } else {
-      this.ch1.play()
-      store.dispatch({type: 'PLAY'})
-    }
+    remote.app.toggle()
   }
-  local (file) {
-    fs.readFile(file.path, (error, data) => {
-      if (error) throw error
-      this.stop()
-      store.dispatch({type: 'PLAY_TRACK', track: file})
-      this.ch1 = AV.Player.fromBuffer(data)
-      this.ch1.play()
-      this.ch1.on('duration', (duration) => {
-        this.ch1.on('progress', (progress) => {
-          this.setCounter(Math.floor((duration - progress) / 1000))
-          this.setPlaybar(duration, progress)
-        })
-      })
-      this.ch1.on('buffer', (buffer) => {
-        this.setBuffer(buffer)
-      })
-      this.ch1.on('metadata', (metadata) => {
-        store.dispatch({type: 'METADATA', artist: metadata.artist, title: metadata.title, album: metadata.album})
-      })
-      this.ch1.on('error', (error) => {
-        store.dispatch({type: 'ERROR', error: error})
-      })
-      this.ch1.on('end', () => {
-        if (store.getState().player.next) this.local(store.getState().player.next)
-        else store.dispatch({type: 'STOP'})
-      })
-    })
+  pause () {
+    clearInterval(this.interval)
+    store.dispatch({type: 'PAUSE'})
+  }
+  resume () {
+    this.setDuration(this.remaining, true)
+    store.dispatch({type: 'PLAY'})
+  }
+  setDuration (duration = 0, previous) {
+    if (!previous) this.totalDuration = duration
+    let end = addSeconds(new Date(), duration)
+    this.seconds = differenceInSeconds(end, new Date())
+    clearInterval(this.interval)
+    this.setCounter(this.seconds)
+    this.interval = setInterval(() => {
+      this.remaining = differenceInSeconds(end, new Date())
+      if (this.remaining < 1) {
+        this.setCounter(0)
+        clearInterval(this.interval)
+      } else {
+        this.setCounter(this.remaining)
+        this.setPlaybar(this.totalDuration, this.remaining)
+      }
+    }, 666)
+  }
+  clearInterval () {
+    clearInterval(this.interval)
+  }
+  local (track) {
+    remote.app.playTrack(track)
+    store.dispatch({type: 'METADATA', artist: track.artist, title: track.title, album: track.album})
   }
   setCounter (seconds) {
     if (!this.counter) this.counter = document.querySelector('figure h4')
@@ -65,11 +64,7 @@ export default class Player {
   }
   setPlaybar (duration, progress) {
     if (!this.range) this.range = document.querySelector('[data-range]')
-    let elapsed = (progress / duration) * 100
-    this.range.style.transform = 'translateX(' + (elapsed - 100) + '%)'
-  }
-  setBuffer (buffer) {
-    if (!this.buffer) this.buffer = document.querySelector('[data-buffer]')
-    this.buffer.style.transform = 'translateX(' + (buffer - 100) + '%)'
+    let elapsed = ((progress / duration) * 100)
+    this.range.style.width = `${100 - elapsed}%`
   }
 }

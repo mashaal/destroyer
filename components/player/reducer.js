@@ -1,5 +1,4 @@
 import { store } from '../../client.js'
-import Player from './index.js'
 
 export const playerReducer = (state = {}, action) => {
   switch (action.type) {
@@ -25,6 +24,9 @@ export const playerReducer = (state = {}, action) => {
       if (!previous || previous.album !== action.track.album) previous = false
       state = {...state, track: action.track, next: next, previous: previous, albumIndex: albumIndex}
       break
+    }
+    case 'STOP': {
+      state = {}
     }
   }
   return state
