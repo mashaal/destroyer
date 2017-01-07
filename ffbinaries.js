@@ -9,6 +9,7 @@ ffbinaries.downloadFiles(platform, {components: ['ffmpeg', 'ffplay', 'ffprobe'],
 
   output.on('close', function () {
     console.log('ffmpeg complete')
+    fs.unlinkSync('./ffmpeg')
   })
 
   archive.on('error', function (err) {
