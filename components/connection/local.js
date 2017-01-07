@@ -1,5 +1,4 @@
 import walk from 'walk'
-import moment from 'moment'
 import { store } from '../../client.js'
 import { sortTracks, sortAlbums } from '../utilities'
 const path = require('path')
@@ -37,7 +36,7 @@ export default class Local {
               metadata.album = metadata.album || ''
               metadata.root = root
               metadata.path = fileName
-              metadata.time = moment(fileStats.mtime).unix()
+              metadata.time = +new Date(fileStats.mtime)
               this.tracks.push(metadata)
               store.dispatch({type: 'SCANNING', message: 'SCANNING: ' + metadata.artist + ' - ' + metadata.album})
               rs.close()
