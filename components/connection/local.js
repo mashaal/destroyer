@@ -4,6 +4,7 @@ import { sortTracks, sortAlbums } from '../utilities'
 const path = require('path')
 const mm = require('musicmetadata')
 const fs = require('fs')
+const dateFns = require('date-fns')
 
 export default class Local {
   collection (fileList) {
@@ -36,7 +37,7 @@ export default class Local {
               metadata.album = metadata.album || ''
               metadata.root = root
               metadata.path = fileName
-              metadata.time = +new Date(fileStats.mtime)
+              metadata.time = Number(dateFns.format(new Date(fileStats.ctime), 'YYYYMMDDmm')) * -1
               this.tracks.push(metadata)
               store.dispatch({type: 'SCANNING', message: 'SCANNING: ' + metadata.artist + ' - ' + metadata.album})
               rs.close()

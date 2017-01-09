@@ -45,7 +45,7 @@ export default class Album extends Component {
     let cover = {backgroundImage:`url(../../library/default.jpg)`}
     if (this.props.album.cover) cover = {backgroundImage: 'url("' + this.props.album.cover + '")'}
     return (
-      <li onClick={this.handleClick} onMouseOver={this.activate} onMouseOut={this.reset} style={[styles.base, this.props.newest ? {order: (this.props.album.time * -1)} : '' ]}>
+      <li onClick={this.handleClick} onMouseOver={this.activate} onMouseOut={this.reset} style={[styles.base, this.props.newest ? {order: (this.props.album.time)} : {order: -2} ]}>
         <div style={this.state.fade ? styles.fade : styles.nonfade}>
           <div ref='album' style={[styles.cover, cover, this.state.active ? styles.zoom : '']}></div>
         </div>

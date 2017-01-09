@@ -28,7 +28,7 @@ export default class Library extends Component {
   render () {
     return (
     <ul ref='library' style={[styles.base, this.props.player.track ? {padding: '12.5vh 0 33vh'} : {padding: '2em 0 33vh'}]}>
-      <div style={{flexBasis: '100%', padding: '0 2em', cursor: 'pointer'}} onClick={()=> store.dispatch({type: 'EDIT_METADATA'})}>
+      <div style={[{flexBasis: '100%', padding: '0 2em 0', cursor: 'pointer'}, {order: -999999999999}]} onClick={()=> store.dispatch({type: 'EDIT_METADATA'})}>
         <Errors errors={this.countErrors()} />
       </div>
       {this.props.library.albums.map((album, index) => {
@@ -67,6 +67,7 @@ const styles = {
   },
   li: {
     flex: '1 1 300px',
-    padding: '1em 2em'
+    padding: '1em 2em',
+    order: 10
   }
 }
