@@ -1,7 +1,7 @@
 import { store } from '../../client.js'
 import { remote } from 'electron'
 const addSeconds = require('date-fns/add_seconds')
-const differenceInSeconds = require('date-fns/difference_in_seconds')
+const differenceInMilliseconds = require('date-fns/difference_in_milliseconds')
 
 export default class Player {
   playAlbum (album) {
@@ -32,20 +32,20 @@ export default class Player {
   }
   setDuration (duration = 0, previous) {
     if (!previous) this.totalDuration = duration
-    let end = addSeconds(new Date(), duration)
-    this.seconds = differenceInSeconds(end, new Date())
+    let end = addSeconds(new Date(), previous ? (duration / 1000) : duration)
+    this.seconds = differenceInMilliseconds(end, new Date())
     clearInterval(this.interval)
-    this.setCounter(this.seconds)
+    this.setCounter(this.seconds / 1000)
     this.interval = setInterval(() => {
-      this.remaining = differenceInSeconds(end, new Date())
+      this.remaining = differenceInMilliseconds(end, new Date())
       if (this.remaining < 1) {
         this.setCounter(0)
         clearInterval(this.interval)
       } else {
-        this.setCounter(this.remaining)
-        this.setPlaybar(this.totalDuration, this.remaining)
+        this.setCounter(this.remaining / 1000)
+        this.setPlaybar(this.totalDuration * 1000, this.remaining)
       }
-    }, 666)
+    }, 250)
   }
   clearInterval () {
     clearInterval(this.interval)
@@ -64,7 +64,7 @@ export default class Player {
   }
   setPlaybar (duration, progress) {
     if (!this.range) this.range = document.querySelector('[data-range]')
-    let elapsed = ((progress / duration) * 100)
-    this.range.style.width = `${100 - elapsed}%`
+    let elapsed = (100 - ((progress / duration) * 100)) + '%'
+    this.range.style.width = elapsed
   }
 }

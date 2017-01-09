@@ -68,7 +68,7 @@ const styles = {
     padding: '0 0em 1em',
     width: '200px',
     cursor: 'pointer',
-    transition: '.25s',
+    transition: '.5s',
     ':hover': {
       background: 'rgba(92, 67, 232, .8)'
     }
