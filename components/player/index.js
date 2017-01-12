@@ -14,6 +14,7 @@ export default class Player {
   }
   next () {
     if (store.getState().player.next) this.playTrack(store.getState().player.next)
+    else this.stop()
   }
   stop () {
     remote.app.stop()

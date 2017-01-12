@@ -62,24 +62,26 @@ app.playTrack = file => {
     } else duration = false
     mainWindow.webContents.executeJavaScript(`window.player.setDuration(${duration})`)
   })
-  player.on('exit', sss)
-  this.playing = this.cnt = true
+  player.on('exit', continous)
+  this.playing = true
   this.track = file
 }
 
 app.currentTrack = () => this.track
 
-const sss = () => {
-  if (this.cnt) next()
-  else app.stop()
+const continous = () => {
+  next()
 }
 
 let next = () => mainWindow.webContents.executeJavaScript('window.player.next()')
 
 app.stop = () => {
-  if (player) player.removeListener('exit', sss)
-  if (this.playing) player.kill()
-  player = this.playing = this.cnt = this.track = null
+  if (player) player.removeListener('exit', continous)
+  if (this.playing) {
+    player.kill()
+    mainWindow.webContents.executeJavaScript('window.player.stop()')
+  }
+  player = this.playing = this.track = null
 }
 
 app.pause = () => {
