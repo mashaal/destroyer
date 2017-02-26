@@ -11,7 +11,8 @@
     "build:watch": "npm run build -- --watch",
     "start": "electron .",
     "ffmpeg": "node ./ffbinaries.js",
-    "pack:osx": "rm -rf Destroyer-darwin-x64 && NODE_ENV=production webpack --progress -p && electron-packager ./ Destroyer --platform=darwin --arch=x64 --icon=icons.icns --prune"
+    "pack:osx": "rm -rf Destroyer-darwin-x64 && NODE_ENV=production webpack --progress -p && electron-packager ./ Destroyer --platform=darwin --arch=x64 --icon=icons.icns --prune",
+    "pack:linux": "rm -rf Destroyer-darwin-x64 && NODE_ENV=production webpack --progress -p && electron-packager . --overwrite --platform=linux --arch=x64 --icon=icons.icns --prune"
   },
   "author": "omar mashaal",
   "license": "ISC",

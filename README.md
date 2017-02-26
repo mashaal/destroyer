@@ -58,5 +58,12 @@
 | `npm run build`       | Compile JS `/bundle`.                           |
 | `npm run build:watch` | Build project and watch for changes.            |
 | `npm start`           | Start Destroyer.                                |
-| `npm run ffmpeg`      | Download FFmpeg binaries.                       |
+| `npm run ffmpeg`      | Download FFmpeg binaries (MacOS & Windows).     |
 | `npm run pack:osx`    | Build for Mac.                                  |
+| `npm run pack:linux`  | Build for Linux 64bit.                          |
+
+### Using on linux
+
+**Destroyer** use `ffplay` from [FFmpeg](https://ffmpeg.org/) and can be installed with your default package manager.
+* For Arch using: `sudo pacman -S ffmpeg`.
+* For Ubuntu/Debian using: `sudo apt-get install ffmpeg`.
