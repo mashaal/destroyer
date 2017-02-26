@@ -8,14 +8,16 @@ import shallowCompare from 'react-addons-shallow-compare'
 const {remote} = require('electron')
 const userData = remote.app.getPath('userData')
 const ffmpeg = require('fluent-ffmpeg')
-
+var ffmpegPath = './ffmpeg'
 const fs = require('fs')
 
 @Radium
 export default class Editor extends Component {
   handleSubmit = event => {
     event.preventDefault()
-    ffmpeg.setFfmpegPath(`${userData}/ffmpeg/ffmpeg`)
+    if (process.platform === 'linux')
+      ffmpegPath = '/usr/bin'
+    ffmpeg.setFfmpegPath(`${ffmpegPath}/ffmpeg`)
     store.dispatch({type: 'DISABLE_METADATA', track: this.props.selected})
     let temp = userData + `/${this.props.selected.path.split('/').pop()}`
     ffmpeg(this.props.selected.path)

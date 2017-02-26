@@ -8,6 +8,7 @@ const spawn = require('child_process').spawn
 const ffmpeg = require('fluent-ffmpeg')
 const fs = require('fs')
 const userData = app.getPath('userData')
+var ffmpegPath = './ffmpeg'
 var extract = require('extract-zip')
 
 const createWindow = () => {
@@ -37,6 +38,15 @@ const createWindow = () => {
 
 app.on('ready', createWindow)
 
+app.on('will-finish-launching', () => {
+  if (process.platform === 'linux') {
+    fs.access('/usr/bin/ffplay', fs.constants.X_OK, (err) => {
+      console.log(err ? 'ffplay does not exist/cannot use ' : 'ffplay can be used')
+    })
+    ffmpegPath = '/usr/bin'
+  }
+})
+
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
     app.stop()
@@ -52,8 +62,8 @@ app.on('activate', () => {
 
 app.playTrack = file => {
   app.stop()
-  player = spawn(`${userData}/ffmpeg/ffplay`, [file.path, '-nodisp', '-autoexit'], {stdio: 'ignore'})
-  ffmpeg.setFfprobePath(`${userData}/ffmpeg/ffprobe`)
+  player = spawn(`${ffmpegPath}/ffplay`, [file.path, '-nodisp', '-autoexit'], {stdio: 'ignore'})
+  ffmpeg.setFfprobePath(`${ffmpegPath}/ffprobe`)
   ffmpeg.ffprobe(file.path, (error, metadata) => {
     let duration
     if (error) throw error
@@ -100,7 +110,7 @@ app.toggle = () => {
   if (this.playing) app.pause()
   else app.resume()
 }
-
+// what does this do?
 if (!fs.existsSync(`${userData}/ff.txt`)) {
   extract(__dirname + '/ffmpeg.zip', {dir: userData}, function (err) {
    fs.writeFile(`${userData}/ff.txt`, '🍑🍆')
