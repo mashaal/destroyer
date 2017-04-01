@@ -15,7 +15,7 @@ const config = {
     loaders: [{
       test: /\.(js|jsx)$/,
       exclude: /node_modules/,
-      loader: 'babel',
+      loader: 'babel-loader',
       query: {
         cacheDirectory: true
       }
@@ -25,8 +25,7 @@ const config = {
     }]
   },
   resolve: {
-    extensions: ['', '.js', '.jsx'],
-    root: path.join(__dirname, 'src')
+    extensions: ['.js', '.jsx']
   },
   plugins: [
     new webpack.EnvironmentPlugin(['NODE_ENV'])
