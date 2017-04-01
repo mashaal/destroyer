@@ -19,7 +19,7 @@ export default class Search extends Component {
   }
   componentDidMount () {
     window.addEventListener('keydown', (event) => {
-      if (!this.props.admin.display && !this.props.metadata.display) {
+      if (!this.props.admin.display) {
         if (key.is(key.code.alnum, event.which) || event.keyCode === 8) {
           this.refs.search.focus()
         }

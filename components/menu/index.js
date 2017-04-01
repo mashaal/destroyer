@@ -100,13 +100,6 @@ export default class MainMenu {
             }
           },
           {
-            label: 'Edit Metadata...',
-            accelerator: 'Command+m',
-            click () {
-              store.dispatch({type: 'EDIT_METADATA'})
-            }
-          },
-          {
             label: 'Quit',
             accelerator: 'Command+Q',
             click () {

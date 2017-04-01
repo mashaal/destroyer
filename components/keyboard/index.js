@@ -11,7 +11,7 @@ export default class Keyboard {
       event.preventDefault()
       store.dispatch({type: 'ESCAPE'})
     }
-    if (event.keyCode === 32 && !store.getState().search.display && !store.getState().metadata.display) {
+    if (event.keyCode === 32 && !store.getState().search.display) {
       event.preventDefault()
       window.player.toggle()
     }

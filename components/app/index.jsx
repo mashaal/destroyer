@@ -2,7 +2,6 @@ import React from 'react'
 import Loading from '../loading'
 import Admin from '../admin'
 import Bar from '../bar'
-import Metadata from '../metadata'
 import Search from '../search'
 import Status from '../status'
 import Library from '../library'
@@ -15,7 +14,6 @@ const App = props =>
     <Style rules={styles} />
     <Bar />
     <Admin admin={props.admin} />
-    <Metadata metadata={props.metadata} library={props.library} />
     <Library library={props.library} player={props.player} />
     <Showcase showcase={props.showcase} player={props.player} />
     <Status status={props.status} />

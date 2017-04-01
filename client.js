@@ -9,7 +9,6 @@ import { adminReducer } from './components/admin/reducer.js'
 import { searchReducer } from './components/search/reducer.js'
 import { libraryReducer } from './components/library/reducer.js'
 import { loadingReducer } from './components/loading/reducer.js'
-import { metadataReducer } from './components/metadata/reducer.js'
 import { showcaseReducer } from './components/showcase/reducer.js'
 import { playerReducer } from './components/player/reducer.js'
 import { playbarReducer } from './components/playbar/reducer.js'
@@ -19,7 +18,6 @@ const reducers = combineReducers({
   admin: adminReducer,
   library: libraryReducer,
   loading: loadingReducer,
-  metadata: metadataReducer,
   showcase: showcaseReducer,
   player: playerReducer,
   playbar: playbarReducer,
