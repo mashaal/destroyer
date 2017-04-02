@@ -1,9 +1,30 @@
 import { store } from '../../client.js'
 import { remote } from 'electron'
-const addSeconds = require('date-fns/add_seconds')
-const differenceInMilliseconds = require('date-fns/difference_in_milliseconds')
 
 export default class Player {
+  constructor () {
+    this.playing = false
+    this.audio = document.getElementById('xxx')
+    let interval
+    this.audio.onplaying = () => {
+      calc()
+    }
+    this.audio.onseeked = () => {
+      calc()
+    }
+    this.audio.onended = () => {
+      this.next()
+    }
+    let calc = () => {
+      clearInterval(interval)
+      interval = setInterval(() => {
+        let d = this.audio.duration
+        let p = this.audio.currentTime
+        this.setCounter(d - p)
+        this.setPlaybar(d, p)
+      }, 50)
+    }
+  }
   playAlbum (album) {
     store.dispatch({type: 'PLAY_ALBUM', album: album})
     this.local(store.getState().player.track)
@@ -16,43 +37,32 @@ export default class Player {
     if (store.getState().player.next) this.playTrack(store.getState().player.next)
   }
   stop () {
-    remote.app.stop()
+    this.audio.stop()
     store.dispatch({type: 'STOP'})
   }
   toggle () {
-    remote.app.toggle()
+    if (this.playing) this.pause()
+    else this.resume()
   }
   pause () {
-    clearInterval(this.interval)
+    this.audio.pause()
+    this.playing = false
     store.dispatch({type: 'PAUSE'})
   }
   resume () {
-    this.setDuration(this.remaining, true)
+    this.audio.play()
+    this.playing = true
     store.dispatch({type: 'PLAY'})
   }
-  setDuration (duration = 0, previous) {
-    if (!previous) this.totalDuration = duration
-    let end = addSeconds(new Date(), previous ? (duration / 1000) : duration)
-    this.seconds = differenceInMilliseconds(end, new Date())
-    clearInterval(this.interval)
-    this.setCounter(this.seconds / 1000)
-    this.interval = setInterval(() => {
-      this.remaining = differenceInMilliseconds(end, new Date())
-      if (this.remaining < 1) {
-        this.setCounter(0)
-        clearInterval(this.interval)
-      } else {
-        this.setCounter(this.remaining / 1000)
-        this.setPlaybar(this.totalDuration * 1000, this.remaining)
-      }
-    }, 250)
-  }
-  clearInterval () {
-    clearInterval(this.interval)
+  scan (percentage) {
+    this.audio.currentTime = percentage * this.audio.duration
   }
   local (track) {
-    remote.app.playTrack(track)
     store.dispatch({type: 'METADATA', artist: track.artist, title: track.title, album: track.album})
+    remote.app.updateTouchBar({artist: track.artist, track: track.title})
+    this.audio.src = track.path
+    this.audio.play()
+    this.playing = true
   }
   setCounter (seconds) {
     if (!this.counter) this.counter = document.querySelector('figure h4')
@@ -60,11 +70,13 @@ export default class Player {
     results.hours = Math.floor(seconds / 60 / 60)
     results.minutes = Math.floor((seconds / 60) % 60)
     results.seconds = Math.floor(seconds % 60)
-    this.counter.innerText = '- ' + '00'.slice(results.hours.toString().length) + results.hours + ':' + '00'.slice(results.minutes.toString().length) + results.minutes + ':' + '00'.slice(results.seconds.toString().length) + results.seconds
+    let time = '- ' + '00'.slice(results.hours.toString().length) + results.hours + ':' + '00'.slice(results.minutes.toString().length) + results.minutes + ':' + '00'.slice(results.seconds.toString().length) + results.seconds
+    this.counter.innerText = time
+    remote.app.updateTouchBarTime(time)
   }
   setPlaybar (duration, progress) {
     if (!this.range) this.range = document.querySelector('[data-range]')
-    let elapsed = (100 - ((progress / duration) * 100)) + '%'
+    let elapsed = (((progress / duration) * 100)) + '%'
     this.range.style.width = elapsed
   }
 }

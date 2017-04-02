@@ -6,12 +6,19 @@ import { rafThrottle } from '../utilities'
 
 @Radium
 export default class Playbar extends Component {
+  constructor () {
+    super()
+    this.state = {
+      hover: false,
+      left: false
+    }
+  }
   shouldComponentUpdate = (nextProps, nextState) => {
     return shallowCompare(this, nextProps, nextState)
   }
   scan = event => {
     event.preventDefault()
-    window.player.scan(this.percentage)
+    window.player.scan(event.clientX / window.innerWidth)
   }
   previous = () => {
     let previous = this.props.player.previous
@@ -26,13 +33,20 @@ export default class Playbar extends Component {
   toggle = () => {
     window.player.toggle()
   }
+  handleMove = event => {
+    event.preventDefault()
+    this.setState({left: event.clientX - 4})
+  }
   render () {
     return (
       <div style={[styles.playbar, this.props.playbar.display ? styles.show : styles.hide]}>
-        <div data-range style={styles.range} />
-        <div data-buffer style={styles.buffer} />
+        <audio id='xxx' />
+        <div style={{position: 'relative', height: 40, width: '100%', cursor: 'none'}} onMouseMove={this.handleMove} onMouseOver={() => this.setState({hover:true})} onMouseLeave={() => this.setState({hover:false})} onClick={this.scan}>
+          <div data-range style={styles.range} />
+          <div data-buffer style={styles.buffer} />
+          <div style={[styles.slider, this.state.hover ? {opacity: 1} : {opacity: 0}, {transform: `translateX(${this.state.left}px)` || 0}]} ref='slider' />
+        </div>
         <div style={styles.panel}><span style={styles.span} key='previous' onClick={this.previous}>previous</span><span style={styles.span} key='toggle' onClick={this.toggle}>{this.props.playbar.toggle}</span><span style={styles.span} key='next' onClick={this.next}>next</span></div>
-        <div style={[styles.slider, this.state.hover ? {opacity: 1} : {opacity: 0}]} ref='slider' onClick={this.scan} />
       </div>
     )
   }
@@ -49,6 +63,15 @@ const styles = {
     WebkitUserSelect: 'none',
     width: '100%',
     transition: '.666s'
+  },
+  slider: {
+    position: 'absolute',
+    width: 4,
+    transition: 'opacity .666s',
+    height: 40,
+    background: 'white',
+    top: 0,
+    zIndex: 69
   },
   panel: {
     height: 45,
@@ -89,7 +112,6 @@ const styles = {
     top: 0,
     position: 'absolute',
     background: 'rgba(92, 67, 232, 0.666)',
-    cursor: 'not-allowed',
     zIndex: 20
   },
   show: {
