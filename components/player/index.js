@@ -38,7 +38,6 @@ export default class Player {
     else this.stop()
   }
   stop () {
-    this.audio.stop()
     store.dispatch({type: 'STOP'})
   }
   toggle () {
