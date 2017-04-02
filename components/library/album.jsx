@@ -42,7 +42,7 @@ export default class Album extends Component {
     this.setState({active: false})
   }
   render () {
-    let cover = {background:`#333333`}
+    let cover = {backgroundColor:`#333333`}
     if (this.props.album.cover) cover = {backgroundImage: 'url("' + this.props.album.cover + '")'}
     return (
       <li onClick={this.handleClick} onMouseOver={this.activate} onMouseOut={this.reset} style={[styles.base, this.props.newest ? {order: (this.props.album.time)} : {order: -2} ]}>
