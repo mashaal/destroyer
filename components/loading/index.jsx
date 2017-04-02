@@ -20,7 +20,7 @@ const styles = {
     transition: '.5s',
     alignItems: 'center',
     justifyContent: 'center',
-    fontSize: '2em'
+    fontSize: '120%'
   },
   span: {
     margin: 'auto'
