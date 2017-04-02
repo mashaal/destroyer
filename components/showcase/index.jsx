@@ -16,7 +16,7 @@ export default class Showcase extends Component {
     else store.dispatch({type: 'CLOSE_SHOWCASE'})
   }
   render () {
-    let cover = {backgroundImage: `url(../../library/default.jpg)`}
+    let cover = {background: `#333333`}
     if (this.props.showcase.album.cover) cover = {backgroundImage: 'url("' + this.props.showcase.album.cover + '")'}
     return (
       <section style={[styles.showcase, this.props.showcase.display ? styles.show : styles.hide]}>
@@ -79,7 +79,6 @@ const styles = {
     width: '66vh',
     backfaceVisibility: 'hidden',
     backgroundSize: 'cover',
-    backgroundColor: 'rgba(33, 33, 33, 1)',
     backgroundPosition: 'center center',
     height: '66vh',
     cursor: 'url(' + play + ') 32 32, pointer',

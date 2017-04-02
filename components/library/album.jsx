@@ -42,7 +42,7 @@ export default class Album extends Component {
     this.setState({active: false})
   }
   render () {
-    let cover = {backgroundImage:`url(../../library/default.jpg)`}
+    let cover = {background:`#333333`}
     if (this.props.album.cover) cover = {backgroundImage: 'url("' + this.props.album.cover + '")'}
     return (
       <li onClick={this.handleClick} onMouseOver={this.activate} onMouseOut={this.reset} style={[styles.base, this.props.newest ? {order: (this.props.album.time)} : {order: -2} ]}>
@@ -57,7 +57,7 @@ export default class Album extends Component {
 
 const styles = {
   base: {
-    flex: '1 1 300px',
+    flex: '1 1 250px',
     padding: '1em 2em',
     lineHeight: '1.5em',
     cursor: 'pointer'
