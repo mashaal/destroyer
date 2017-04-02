@@ -44,7 +44,7 @@ export default class Playbar extends Component {
         <div style={{position: 'relative', height: 40, width: '100%', cursor: 'none'}} onMouseMove={this.handleMove} onMouseOver={() => this.setState({hover:true})} onMouseLeave={() => this.setState({hover:false})} onClick={this.scan}>
           <div data-range style={styles.range} />
           <div data-buffer style={styles.buffer} />
-          <div style={[styles.slider, this.state.hover ? {opacity: 1} : {opacity: 0}, {transform: `translateX(${this.state.left}px)` || 0}]} ref='slider' />
+          <div style={[styles.slider, this.state.hover ? {opacity: 1} : {opacity: 0}, {transform: `translateX(${this.state.left}px)` || 0}]} />
         </div>
         <div style={styles.panel}><span style={styles.span} key='previous' onClick={this.previous}>previous</span><span style={styles.span} key='toggle' onClick={this.toggle}>{this.props.playbar.toggle}</span><span style={styles.span} key='next' onClick={this.next}>next</span></div>
       </div>
@@ -76,7 +76,7 @@ const styles = {
   panel: {
     height: 45,
     width: '100%',
-    position: 'relative',
+    position: 'absolute',
     textAlign: 'center',
     top: 40,
     borderTop: '2px solid #212121',
