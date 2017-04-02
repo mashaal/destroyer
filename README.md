@@ -1,14 +1,19 @@
-<img src='http://destroyer.audio/static/destroyer.png' width='250px'/>
+<img src='https://www.dropbox.com/s/alcqju8k9lkr3b9/destroyer-logo.png?raw=1' width='250px'/>
 
 # Destroyer
 ### Open-Source Lossless Audio Player
 
 ![destroyer](http://destroyer.audio/static/destroyer.jpg)
 
-* Lossless playback (supports FLAC and ALAC - in addition to AAC, MP3, MP4)
-* Metadata editor
-* Modern UI with focus on album artwork
-* Open-Source and built with web technologies
+### v2.0 Breaking Changes:
+
+* Swap to native HTML5 audio players (FLAC, MP4, MP3, OGG, WAV supported!)
+* Seeking (finally!)
+* TouchBar support for Macbook Pro!
+* An actual DMG install file for Mac (wow!)
+* Removal of FFPLAY and FFMEG (this should make it easier to build for all OS!)
+* Removal of metadata editor (may come back!)
+* Minor style tweeks
 
 [Download for Mac](https://github.com/mashaal/destroyer/releases)
 
@@ -24,24 +29,10 @@
 
 **Note:** **Destroyer** is dependant on metadata — it can process [Vorbis](https://wiki.xiph.org/Metadata) comments as well as [ID3](https://en.wikipedia.org/wiki/ID3) (1.1, 2.2, 2.3, 2.4) tags. Please ensure your collection is properly formatted.
 
-## On Metadata:
-
-![metadata](http://destroyer.audio/static/metadata.gif)
-
-> `Menu > Destroyer > Edit Metadata...` or `cmd-m`
-
-* On import, **Destroyer** will analyze your collection for incomplete/missing metadata.
-* You can view/edit metadata in the metadata view `cmd-m`
-
-**Protip:** While playing a track, toggling the metadata view will take you directly to the currently playing album.
-
 ## On Artwork:
-
-![artwork](http://destroyer.audio/static/artwork.gif)
 
 * **Destroyer** works best when all the tracks for an album are in one flat directory.
 * **Destroyer** will look for a file named `cover.jpg` in the album's directory.
-* You can drag and drop new artwork in the metadata view.
 
 ## On Search:
 
@@ -52,11 +43,9 @@
 
 ### Deving and Building
 
-| Command               | Purpose                                         |
-|:----------------------|:------------------------------------------------|
-| `npm run clean`       | Delete `/bundle`.                               |
-| `npm run build`       | Compile JS `/bundle`.                           |
-| `npm run build:watch` | Build project and watch for changes.            |
-| `npm start`           | Start Destroyer.                                |
-| `npm run ffmpeg`      | Download FFmpeg binaries.                       |
-| `npm run pack:osx`    | Build for Mac.                                  |
+| Command                | Purpose                                         |
+|:-----------------------|:------------------------------------------------|
+| `yarn run build`       | Compile JS `/bundle`.                           |
+| `yarn run build:watch` | Build project and watch for changes.            |
+| `yarn start`           | Start Destroyer.                                |
+| `yarn run pack:osx`    | Build for Mac.                                  |
