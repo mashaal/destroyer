@@ -27,7 +27,7 @@ const createWindow = () => {
     height: mainWindowState.height,
     titleBarStyle: 'hidden',
     darkTheme: true,
-    transparent: true,
+    show: false,
     webPreferences: {
       backgroundThrottling: false
     }
@@ -35,6 +35,9 @@ const createWindow = () => {
   mainWindowState.manage(mainWindow)
   mainWindow.loadURL(`file://${__dirname}/components/app/index.html`)
   mainWindow.setTouchBar(touchBar)
+  mainWindow.once('ready-to-show', () => {
+    mainWindow.show()
+  })
   mainWindow.on('closed', () => {
     mainWindow = null
   })
