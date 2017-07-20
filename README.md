@@ -49,3 +49,4 @@
 | `yarn run build:watch` | Build project and watch for changes.            |
 | `yarn start`           | Start Destroyer.                                |
 | `yarn run pack:osx`    | Build for Mac.                                  |
+| `yarn run pack:win`    | Build for Windows.                              |
