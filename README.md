@@ -17,7 +17,7 @@
 
 [Download for Mac](https://github.com/mashaal/destroyer/releases)
 
-[Watch demo video on YouTube](https://www.youtube.com/watch?v=xqZwJ7lf9h8&feature=youtu.be)
+[Watch demo video on YouTube](https://www.youtube.com/watch?v=mJwW7uwNY4s)
 
 ## Getting Started:
 
