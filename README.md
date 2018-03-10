@@ -1,6 +1,7 @@
 <img src='https://www.dropbox.com/s/alcqju8k9lkr3b9/destroyer-logo.png?raw=1' width='250px'/>
 
 # Destroyer
+
 ### Open-Source Lossless Audio Player
 
 ![destroyer](http://destroyer.audio/static/destroyer.jpg)
@@ -32,7 +33,7 @@
 ## On Artwork:
 
 * **Destroyer** works best when all the tracks for an album are in one flat directory.
-* **Destroyer** will look for a file named `cover.jpg` in the album's directory.
+* **Destroyer** will look for a file named `cover.jpg` in the album's directory, if `cover.jpg` not found, it will fallback to any `jpg` or `png` in directory.
 
 ## On Search:
 
@@ -43,10 +44,10 @@
 
 ### Deving and Building
 
-| Command                | Purpose                                         |
-|:-----------------------|:------------------------------------------------|
-| `yarn run build`       | Compile JS `/bundle`.                           |
-| `yarn run build:watch` | Build project and watch for changes.            |
-| `yarn start`           | Start Destroyer.                                |
-| `yarn run pack:osx`    | Build for Mac.                                  |
-| `yarn run pack:win`    | Build for Windows.                              |
+| Command            | Purpose                              |
+| :----------------- | :----------------------------------- |
+| `yarn build`       | Compile JS `/bundle`.                |
+| `yarn build:watch` | Build project and watch for changes. |
+| `yarn start`       | Start Destroyer.                     |
+| `yarn pack:osx`    | Build for Mac.                       |
+| `yarn pack:win`    | Build for Windows.                   |

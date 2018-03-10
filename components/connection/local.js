@@ -8,7 +8,7 @@ const dateFns = require('date-fns')
 const minimatch = require('minimatch')
 
 export default class Local {
-  collection(fileList) {
+  collection (fileList) {
     this.paths = []
     this.tracks = []
     this.covers = []
@@ -18,7 +18,7 @@ export default class Local {
       if (index === fileList.length - 1) this.scan(0)
     }
   }
-  scan(index) {
+  scan (index) {
     if (index >= this.paths.length) {
       localStorage.setItem('fileList', JSON.stringify(this.paths))
       this.end()
@@ -70,7 +70,7 @@ export default class Local {
       })
     }
   }
-  end() {
+  end () {
     this.tracks.forEach((track, index) => {
       let find = this.albums.filter(
         album => album.title === track.album && album.artist === track.artist
