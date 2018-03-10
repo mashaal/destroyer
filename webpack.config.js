@@ -2,9 +2,7 @@ const path = require('path')
 const webpack = require('webpack')
 
 const config = {
-  entry: [
-    path.join(__dirname, '/client.js')
-  ],
+  entry: [path.join(__dirname, '/client.js')],
   output: {
     path: path.join(__dirname, '/bundle'),
     publicPath: '/bundle/',
@@ -12,24 +10,25 @@ const config = {
   },
   target: 'electron',
   module: {
-    loaders: [{
-      test: /\.(js|jsx)$/,
-      exclude: /node_modules/,
-      loader: 'babel-loader',
-      query: {
-        cacheDirectory: true
+    loaders: [
+      {
+        test: /\.(js|jsx)$/,
+        exclude: /node_modules/,
+        loader: 'babel-loader',
+        query: {
+          cacheDirectory: true
+        }
+      },
+      {
+        test: /\.(svg|png|jpg|webm|mp4|woff|woff2)$/,
+        loader: 'url-loader'
       }
-    }, {
-      test: /\.(svg|png|jpg|webm|mp4|woff|woff2)$/,
-      loader: 'url-loader'
-    }]
+    ]
   },
   resolve: {
     extensions: ['.js', '.jsx']
   },
-  plugins: [
-    new webpack.EnvironmentPlugin(['NODE_ENV'])
-  ]
+  plugins: [new webpack.EnvironmentPlugin(['NODE_ENV'])]
 }
 
 if (process.env.NODE_ENV === 'production') {

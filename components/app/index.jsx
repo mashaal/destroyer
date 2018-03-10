@@ -7,9 +7,9 @@ import Status from '../status'
 import Library from '../library'
 import Showcase from '../showcase'
 import Playbar from '../playbar'
-import Radium, {StyleRoot, Style} from 'radium'
+import Radium, { StyleRoot, Style } from 'radium'
 
-const App = props =>
+const App = props => (
   <StyleRoot>
     <Style rules={styles} />
     <Bar />
@@ -19,8 +19,13 @@ const App = props =>
     <Status status={props.status} />
     <Loading loading={props.loading} />
     <Playbar playbar={props.playbar} player={props.player} />
-    <Search search={props.search} admin={props.admin} metadata={props.metadata} />
+    <Search
+      search={props.search}
+      admin={props.admin}
+      metadata={props.metadata}
+    />
   </StyleRoot>
+)
 
 export default Radium(App)
 
@@ -33,15 +38,18 @@ const styles = {
     margin: 0,
     padding: 0,
     lineHeight: 1.5,
-    fontFamily: 'averia-serif, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif',
+    fontFamily:
+      'averia-serif, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif',
     color: 'white',
     backgroundColor: '#212121'
   },
   input: {
-    fontFamily: 'averia-serif, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif'
+    fontFamily:
+      'averia-serif, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif'
   },
   button: {
-    fontFamily: 'averia-serif, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif'
+    fontFamily:
+      'averia-serif, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif'
   },
   '::selection': {
     backgroundColor: 'rgba(92, 67, 232, 1)',

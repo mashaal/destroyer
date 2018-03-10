@@ -5,50 +5,64 @@ import Radium from 'radium'
 
 @Radium
 export default class Admin extends Component {
-  constructor () {
+  constructor() {
     super()
     this.state = {
       dragging: false,
       mouse: true
     }
   }
-  componentDidMount () {
+  componentDidMount() {
     this.local = new Local()
-    if (localStorage.getItem('fileList')) this.local.collection(JSON.parse(localStorage.getItem('fileList')))
-    else store.dispatch({type: 'ADMIN'})
+    if (localStorage.getItem('fileList'))
+      this.local.collection(JSON.parse(localStorage.getItem('fileList')))
+    else store.dispatch({ type: 'ADMIN' })
     window.addEventListener('dragenter', () => {
-      store.dispatch({type: 'ADMIN'})
+      store.dispatch({ type: 'ADMIN' })
     })
     window.addEventListener('dragleave', () => {
-      store.dispatch({type: 'DROP'})
+      store.dispatch({ type: 'DROP' })
     })
   }
   handleDragEnter = event => {
-    this.setState({dragging: true})
+    this.setState({ dragging: true })
   }
   handleMouseOver = event => {
-    this.setState({mouse: true})
+    this.setState({ mouse: true })
   }
   handleDragOver = event => {
     event.preventDefault()
   }
   handleMouseOut = event => {
-    this.setState({mouse: false})
+    this.setState({ mouse: false })
   }
   handleDragLeave = event => {
-    this.setState({dragging: false})
+    this.setState({ dragging: false })
   }
   handleDrop = event => {
     event.preventDefault()
-    this.setState({dragging: false})
+    this.setState({ dragging: false })
     if (event.dataTransfer.files.length > 0) {
       this.local.collection(event.dataTransfer.files)
-      store.dispatch({type: 'DROP'})
+      store.dispatch({ type: 'DROP' })
     }
   }
-  render () {
+  render() {
     return (
-      <figure style={[styles.drop, this.props.admin.display || this.state.dragging ? styles.show : styles.hide]} onMouseOver={this.handleMouseOver} onMouseOut={this.handleMouseOut} onDragEnter={this.handleDragEnter} onDragOver={this.handleDragOver} onDragLeave={this.handleDragLeave} onDrop={this.handleDrop}>
+      <figure
+        style={[
+          styles.drop,
+          this.props.admin.display || this.state.dragging
+            ? styles.show
+            : styles.hide
+        ]}
+        onMouseOver={this.handleMouseOver}
+        onMouseOut={this.handleMouseOut}
+        onDragEnter={this.handleDragEnter}
+        onDragOver={this.handleDragOver}
+        onDragLeave={this.handleDragLeave}
+        onDrop={this.handleDrop}
+      >
         <span style={styles.span}>Drop music collection here</span>
       </figure>
     )

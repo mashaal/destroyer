@@ -8,11 +8,18 @@ export default class Track extends Component {
   handleClick = () => {
     window.player.playTrack(this.props.track)
   }
-  render () {
+  render() {
     return (
       <li style={styles.li} onClick={this.handleClick}>
         <span style={styles.no}>{leftpad(this.props.track.track.no, 2)}</span>
-        <span style={[styles.span, this.props.player.track === this.props.track ? styles.current : '']}>{this.props.track.title}</span>
+        <span
+          style={[
+            styles.span,
+            this.props.player.track === this.props.track ? styles.current : ''
+          ]}
+        >
+          {this.props.track.title}
+        </span>
       </li>
     )
   }

@@ -5,13 +5,23 @@ export const playerReducer = (state = {}, action) => {
     case 'PLAY_ALBUM': {
       let matching = []
       let next
-      store.getState().library.tracks.forEach((track) => {
-        if ((track.album === action.album.title) && (track.artist === action.album.artist)) matching.push(track)
+      store.getState().library.tracks.forEach(track => {
+        if (
+          track.album === action.album.title &&
+          track.artist === action.album.artist
+        )
+          matching.push(track)
       })
       if (!matching[1]) next = false
       else next = matching[1]
       let albumIndex = findAlbums(matching[0])
-      state = {...state, track: matching[0], next: next, previous: false, albumIndex: albumIndex}
+      state = {
+        ...state,
+        track: matching[0],
+        next: next,
+        previous: false,
+        albumIndex: albumIndex
+      }
       break
     }
     case 'PLAY_TRACK': {
@@ -22,7 +32,13 @@ export const playerReducer = (state = {}, action) => {
       let albumIndex = findAlbums(action.track)
       if (!next || next.album !== action.track.album) next = false
       if (!previous || previous.album !== action.track.album) previous = false
-      state = {...state, track: action.track, next: next, previous: previous, albumIndex: albumIndex}
+      state = {
+        ...state,
+        track: action.track,
+        next: next,
+        previous: previous,
+        albumIndex: albumIndex
+      }
       break
     }
     case 'STOP': {
@@ -36,7 +52,7 @@ let findAlbums = track => {
   let albums = store.getState().library.albums
   let albumIndex = 0
   albums.some((album, index) => {
-    if ((album.title === track.album) && (album.artist === track.artist)) {
+    if (album.title === track.album && album.artist === track.artist) {
       albumIndex = index
       return
     }

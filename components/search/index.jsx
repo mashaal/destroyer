@@ -7,7 +7,7 @@ import { store } from '../../client.js'
 
 @Radium
 export default class Search extends Component {
-  constructor () {
+  constructor() {
     super()
     this.state = {
       search: ''
@@ -17,8 +17,8 @@ export default class Search extends Component {
   shouldComponentUpdate = (nextProps, nextState) => {
     return shallowCompare(this, nextProps, nextState)
   }
-  componentDidMount () {
-    window.addEventListener('keydown', (event) => {
+  componentDidMount() {
+    window.addEventListener('keydown', event => {
       if (!this.props.admin.display) {
         if (key.is(key.code.alnum, event.which) || event.keyCode === 8) {
           this.refs.search.focus()
@@ -26,15 +26,26 @@ export default class Search extends Component {
       }
     })
   }
-  handleSearch (event) {
+  handleSearch(event) {
     event.preventDefault()
-    store.dispatch({type: 'SEARCH', input: event.target.value})
+    store.dispatch({ type: 'SEARCH', input: event.target.value })
   }
-  render () {
+  render() {
     return (
-      <form style={[styles.search, this.props.search.display ? styles.show : styles.hide]}>
+      <form
+        style={[
+          styles.search,
+          this.props.search.display ? styles.show : styles.hide
+        ]}
+      >
         <CloseButton />
-        <input ref='search' type='text' value={this.props.search.input} style={styles.input} onChange={this.handleSearch} />
+        <input
+          ref="search"
+          type="text"
+          value={this.props.search.input}
+          style={styles.input}
+          onChange={this.handleSearch}
+        />
       </form>
     )
   }

@@ -12,20 +12,43 @@ export default class Showcase extends Component {
     return shallowCompare(this, nextProps, nextState)
   }
   handleClick = event => {
-    if (event.target.tagName === 'ARTICLE') window.player.playAlbum(this.props.showcase.album)
-    else store.dispatch({type: 'CLOSE_SHOWCASE'})
+    if (event.target.tagName === 'ARTICLE')
+      window.player.playAlbum(this.props.showcase.album)
+    else store.dispatch({ type: 'CLOSE_SHOWCASE' })
   }
-  render () {
-    let cover = {backgroundColor: `#333333`}
-    if (this.props.showcase.album.cover) cover = {backgroundImage: 'url("' + this.props.showcase.album.cover + '")'}
+  render() {
+    let cover = { backgroundColor: `#333333` }
+    if (this.props.showcase.album.cover)
+      cover = {
+        backgroundImage: 'url("' + this.props.showcase.album.cover + '")'
+      }
     return (
-      <section style={[styles.showcase, this.props.showcase.display ? styles.show : styles.hide]}>
-        <figure style={[styles.figure, this.props.showcase.display ? styles.top : styles.bottom]} onClick={this.handleClick}>
+      <section
+        style={[
+          styles.showcase,
+          this.props.showcase.display ? styles.show : styles.hide
+        ]}
+      >
+        <figure
+          style={[
+            styles.figure,
+            this.props.showcase.display ? styles.top : styles.bottom
+          ]}
+          onClick={this.handleClick}
+        >
           <article style={[styles.article, cover]} />
         </figure>
-        <ol style={[styles.ol, this.props.showcase.display ? styles.slide : '']}>
+        <ol
+          style={[styles.ol, this.props.showcase.display ? styles.slide : '']}
+        >
           {this.props.showcase.tracks.map((track, index) => {
-            if ((this.props.showcase.album.title === track.album) && (this.props.showcase.album.artist === track.artist)) return (<Track track={track} key={index} player={this.props.player} />)
+            if (
+              this.props.showcase.album.title === track.album &&
+              this.props.showcase.album.artist === track.artist
+            )
+              return (
+                <Track track={track} key={index} player={this.props.player} />
+              )
           })}
         </ol>
       </section>

@@ -1,8 +1,7 @@
 import React from 'react'
 import Radium from 'radium'
 
-const Bar = () =>
-  <nav style={styles.base} />
+const Bar = () => <nav style={styles.base} />
 
 export default Radium(Bar)
 

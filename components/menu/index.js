@@ -1,9 +1,9 @@
-const {remote} = require('electron')
-const {Menu, MenuItem} = remote
+const { remote } = require('electron')
+const { Menu, MenuItem } = remote
 import { store } from '../../client.js'
 
 export default class MainMenu {
-  constructor () {
+  constructor() {
     this.template = [
       {
         label: 'Edit',
@@ -35,14 +35,14 @@ export default class MainMenu {
         submenu: [
           {
             label: 'Sort Alphabeticaly',
-            click () {
-              store.dispatch({type: 'ALPHA'})
+            click() {
+              store.dispatch({ type: 'ALPHA' })
             }
           },
           {
             label: 'Sort Newest',
-            click () {
-              store.dispatch({type: 'NEW'})
+            click() {
+              store.dispatch({ type: 'NEW' })
             }
           },
           {
@@ -51,21 +51,24 @@ export default class MainMenu {
           {
             label: 'Reload',
             accelerator: 'CmdOrCtrl+R',
-            click (item, focusedWindow) {
+            click(item, focusedWindow) {
               if (focusedWindow) focusedWindow.reload()
             }
           },
           {
             label: 'Toggle Full Screen',
-            accelerator: process.platform === 'darwin' ? 'Ctrl+Command+F' : 'F11',
-            click (item, focusedWindow) {
-              if (focusedWindow) focusedWindow.setFullScreen(!focusedWindow.isFullScreen())
+            accelerator:
+              process.platform === 'darwin' ? 'Ctrl+Command+F' : 'F11',
+            click(item, focusedWindow) {
+              if (focusedWindow)
+                focusedWindow.setFullScreen(!focusedWindow.isFullScreen())
             }
           },
           {
             label: 'Toggle Developer Tools',
-            accelerator: process.platform === 'darwin' ? 'Alt+Command+I' : 'Ctrl+Shift+I',
-            click (item, focusedWindow) {
+            accelerator:
+              process.platform === 'darwin' ? 'Alt+Command+I' : 'Ctrl+Shift+I',
+            click(item, focusedWindow) {
               if (focusedWindow) focusedWindow.webContents.toggleDevTools()
             }
           }
@@ -95,14 +98,14 @@ export default class MainMenu {
           {
             label: 'Add Files...',
             accelerator: 'Command+,',
-            click () {
-              store.dispatch({type: 'ADMIN'})
+            click() {
+              store.dispatch({ type: 'ADMIN' })
             }
           },
           {
             label: 'Quit',
             accelerator: 'Command+Q',
-            click () {
+            click() {
               remote.app.quit()
             }
           }

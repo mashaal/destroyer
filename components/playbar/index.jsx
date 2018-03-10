@@ -6,7 +6,7 @@ import { rafThrottle } from '../utilities'
 
 @Radium
 export default class Playbar extends Component {
-  constructor () {
+  constructor() {
     super()
     this.state = {
       hover: false,
@@ -35,18 +35,50 @@ export default class Playbar extends Component {
   }
   handleMove = event => {
     event.preventDefault()
-    this.setState({left: event.clientX - 4})
+    this.setState({ left: event.clientX - 4 })
   }
-  render () {
+  render() {
     return (
-      <div style={[styles.playbar, this.props.playbar.display ? styles.show : styles.hide]}>
-        <audio id='xxx' />
-        <div style={{position: 'relative', height: 40, width: '100%', cursor: 'none'}} onMouseMove={this.handleMove} onMouseOver={() => this.setState({hover:true})} onMouseLeave={() => this.setState({hover:false})} onClick={this.scan}>
+      <div
+        style={[
+          styles.playbar,
+          this.props.playbar.display ? styles.show : styles.hide
+        ]}
+      >
+        <audio id="xxx" />
+        <div
+          style={{
+            position: 'relative',
+            height: 40,
+            width: '100%',
+            cursor: 'none'
+          }}
+          onMouseMove={this.handleMove}
+          onMouseOver={() => this.setState({ hover: true })}
+          onMouseLeave={() => this.setState({ hover: false })}
+          onClick={this.scan}
+        >
           <div data-range style={styles.range} />
           <div data-buffer style={styles.buffer} />
-          <div style={[styles.slider, this.state.hover ? {opacity: 1} : {opacity: 0}, {transform: `translateX(${this.state.left}px)` || 0}]} />
+          <div
+            style={[
+              styles.slider,
+              this.state.hover ? { opacity: 1 } : { opacity: 0 },
+              { transform: `translateX(${this.state.left}px)` || 0 }
+            ]}
+          />
         </div>
-        <div style={styles.panel}><span style={styles.span} key='previous' onClick={this.previous}>previous</span><span style={styles.span} key='toggle' onClick={this.toggle}>{this.props.playbar.toggle}</span><span style={styles.span} key='next' onClick={this.next}>next</span></div>
+        <div style={styles.panel}>
+          <span style={styles.span} key="previous" onClick={this.previous}>
+            previous
+          </span>
+          <span style={styles.span} key="toggle" onClick={this.toggle}>
+            {this.props.playbar.toggle}
+          </span>
+          <span style={styles.span} key="next" onClick={this.next}>
+            next
+          </span>
+        </div>
       </div>
     )
   }

@@ -1,8 +1,10 @@
 import React from 'react'
 import Radium from 'radium'
 
-const Status = props =>
-  <figure style={[styles.status, props.status.display ? styles.show : styles.hide]}>
+const Status = props => (
+  <figure
+    style={[styles.status, props.status.display ? styles.show : styles.hide]}
+  >
     <div>
       <h1 style={styles.h1}>{props.status.artist}</h1>
       <h2 style={styles.h2}>{props.status.title}</h2>
@@ -10,6 +12,7 @@ const Status = props =>
       <h4 style={styles.h4}>- 00:00:00</h4>
     </div>
   </figure>
+)
 
 export default Radium(Status)
 
@@ -26,7 +29,8 @@ const styles = {
     alignItems: 'center',
     justifyContent: 'center',
     pointerEvents: 'none',
-    backgroundImage: 'linear-gradient( to bottom, rgba(33, 33, 33, .9), rgba(33, 33, 33, 0))',
+    backgroundImage:
+      'linear-gradient( to bottom, rgba(33, 33, 33, .9), rgba(33, 33, 33, 0))',
     top: 0,
     left: 0,
     textAlign: 'center',

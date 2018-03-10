@@ -1,13 +1,21 @@
 import React from 'react'
 import Radium from 'radium'
 
-const Input = props =>
+const Input = props => (
   <div style={styles.base}>
-    <div style={{padding: '0 .5em'}}>
+    <div style={{ padding: '0 .5em' }}>
       {props.label && <label style={styles.label}>{props.label}</label>}
-      <input type={props.type || 'text'} style={styles.input} required={props.required} value={props.value} onChange={props.onChange} data-label={props.label} />
+      <input
+        type={props.type || 'text'}
+        style={styles.input}
+        required={props.required}
+        value={props.value}
+        onChange={props.onChange}
+        data-label={props.label}
+      />
     </div>
   </div>
+)
 
 export default Radium(Input)
 

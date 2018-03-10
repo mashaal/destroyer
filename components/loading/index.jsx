@@ -1,10 +1,13 @@
 import React from 'react'
 import Radium from 'radium'
 
-const Loading = props =>
-  <section style={[styles.base, props.loading.display ? styles.show : styles.hide]}>
+const Loading = props => (
+  <section
+    style={[styles.base, props.loading.display ? styles.show : styles.hide]}
+  >
     <span style={styles.span}>{props.loading.message}</span>
   </section>
+)
 
 export default Radium(Loading)
 

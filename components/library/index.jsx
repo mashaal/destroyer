@@ -6,30 +6,47 @@ import { store } from '../../client.js'
 
 @Radium
 export default class Library extends Component {
-  componentDidMount () {
-    if (localStorage.getItem('newest') === 'true') store.dispatch({type: 'NEW'})
-    else store.dispatch({type: 'ALPHA'})
+  componentDidMount() {
+    if (localStorage.getItem('newest') === 'true')
+      store.dispatch({ type: 'NEW' })
+    else store.dispatch({ type: 'ALPHA' })
   }
   shouldComponentUpdate = (nextProps, nextState) => {
     return shallowCompare(this, nextProps, nextState)
   }
-  render () {
+  render() {
     return (
-    <ul ref='library' style={[styles.base, this.props.player.track ? {padding: '12.5vh 0 33vh'} : {padding: '2em 0 33vh'}]}>
-      {this.props.library.albums.map((album, index) => {
-        if (album.title && album.artist) return (<Album album={album} key={index} container={this.refs.library} newest={this.props.library.newest} />)
-      })}
-      <li style={styles.li} />
-      <li style={styles.li} />
-      <li style={styles.li} />
-      <li style={styles.li} />
-      <li style={styles.li} />
-      <li style={styles.li} />
-      <li style={styles.li} />
-      <li style={styles.li} />
-      <li style={styles.li} />
-      <li style={styles.li} />
-    </ul>
+      <ul
+        ref="library"
+        style={[
+          styles.base,
+          this.props.player.track
+            ? { padding: '12.5vh 0 33vh' }
+            : { padding: '2em 0 33vh' }
+        ]}
+      >
+        {this.props.library.albums.map((album, index) => {
+          if (album.title && album.artist)
+            return (
+              <Album
+                album={album}
+                key={index}
+                container={this.refs.library}
+                newest={this.props.library.newest}
+              />
+            )
+        })}
+        <li style={styles.li} />
+        <li style={styles.li} />
+        <li style={styles.li} />
+        <li style={styles.li} />
+        <li style={styles.li} />
+        <li style={styles.li} />
+        <li style={styles.li} />
+        <li style={styles.li} />
+        <li style={styles.li} />
+        <li style={styles.li} />
+      </ul>
     )
   }
 }

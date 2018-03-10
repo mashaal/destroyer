@@ -8,48 +8,62 @@ import inView from 'in-view'
 
 @Radium
 export default class Album extends Component {
-  constructor (props) {
+  constructor(props) {
     super()
     this.state = {
       active: false,
       fade: true
     }
   }
-  componentDidMount () {
+  componentDidMount() {
     this.album = ReactDOM.findDOMNode(this.refs.album)
     this.container = ReactDOM.findDOMNode(this.props.container)
     this.coverEvent = rafThrottle(this.coverHandler)
     this.container.addEventListener('scroll', this.coverEvent)
     this.coverHandler()
   }
-  componentWillUnmount () {
+  componentWillUnmount() {
     this.container.removeEventListener('scroll', this.coverEvent)
   }
   shouldComponentUpdate = (nextProps, nextState) => {
     return shallowCompare(this, nextProps, nextState)
   }
   coverHandler = () => {
-    if (inView.is(this.album)) this.setState({fade: false})
-    else this.setState({fade: true})
+    if (inView.is(this.album)) this.setState({ fade: false })
+    else this.setState({ fade: true })
   }
   handleClick = () => {
-    store.dispatch({type: 'SHOWCASE', album: this.props.album})
+    store.dispatch({ type: 'SHOWCASE', album: this.props.album })
   }
   activate = () => {
-    this.setState({active: true})
+    this.setState({ active: true })
   }
   reset = () => {
-    this.setState({active: false})
+    this.setState({ active: false })
   }
-  render () {
-    let cover = {backgroundColor:`#333333`}
-    if (this.props.album.cover) cover = {backgroundImage: 'url("' + this.props.album.cover + '")'}
+  render() {
+    let cover = { backgroundColor: `#333333` }
+    if (this.props.album.cover)
+      cover = { backgroundImage: 'url("' + this.props.album.cover + '")' }
     return (
-      <li onClick={this.handleClick} onMouseOver={this.activate} onMouseOut={this.reset} style={[styles.base, this.props.newest ? {order: (this.props.album.time)} : {order: -2} ]}>
+      <li
+        onClick={this.handleClick}
+        onMouseOver={this.activate}
+        onMouseOut={this.reset}
+        style={[
+          styles.base,
+          this.props.newest ? { order: this.props.album.time } : { order: -2 }
+        ]}
+      >
         <div style={this.state.fade ? styles.fade : styles.nonfade}>
-          <div ref='album' style={[styles.cover, cover, this.state.active ? styles.zoom : '']}></div>
+          <div
+            ref="album"
+            style={[styles.cover, cover, this.state.active ? styles.zoom : '']}
+          />
         </div>
-        <span style={[this.state.active ? styles.active : '']}>{this.props.album.artist + ' - ' + this.props.album.title}</span>
+        <span style={[this.state.active ? styles.active : '']}>
+          {this.props.album.artist + ' - ' + this.props.album.title}
+        </span>
       </li>
     )
   }
