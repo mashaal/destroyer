@@ -1,6 +1,6 @@
 {
   "name": "Destroyer",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Lossless Audio Player",
   "main": "index.js",
   "private": true,
@@ -10,8 +10,10 @@
     "build": "NODE_ENV=development webpack --progress",
     "build:watch": "yarn run build -- --watch",
     "start": "electron index.js",
-    "pack:osx": "rm -rf Destroyer-darwin-x64 && NODE_ENV=production webpack --progress -p && electron-packager ./ Destroyer --platform=darwin --arch=x64 --icon=icons.icns --prune",
-    "pack:win": "NODE_ENV=production webpack --progress -p && electron-packager ./ Destroyer --out=dist/windows --platform=win32 --arch=x64 --overwrite --icon=icons.ico --prune"
+    "pack:osx":
+      "rm -rf Destroyer-darwin-x64 && NODE_ENV=production webpack --progress -p && electron-packager ./ Destroyer --platform=darwin --arch=x64 --icon=icons.icns --prune",
+    "pack:win":
+      "NODE_ENV=production webpack --progress -p && electron-packager ./ Destroyer --out=dist/windows --platform=win32 --arch=x64 --overwrite --icon=icons.ico --prune"
   },
   "author": "omar mashaal",
   "license": "ISC",
@@ -56,21 +58,11 @@
     "webpack": "^2.3.2"
   },
   "babel": {
-    "presets": [
-      "es2015",
-      "stage-0",
-      "react"
-    ],
-    "plugins": [
-      "transform-runtime",
-      "transform-decorators-legacy"
-    ]
+    "presets": ["es2015", "stage-0", "react"],
+    "plugins": ["transform-runtime", "transform-decorators-legacy"]
   },
   "eslintConfig": {
     "parser": "babel-eslint",
-    "extends": [
-      "standard",
-      "standard-react"
-    ]
+    "extends": ["standard", "standard-react"]
   }
 }
