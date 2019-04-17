@@ -4,7 +4,7 @@
 
 ### Open-Source Lossless Audio Player
 
-![destroyer](http://destroyer.audio/static/destroyer.jpg)
+![destroyer](https://www.dropbox.com/s/1yhcbcw2if0cwhp/destroyer.jpg?raw=1)
 
 ### v2.0 Breaking Changes:
 
@@ -22,7 +22,7 @@
 
 ## Getting Started:
 
-![start](http://destroyer.audio/static/start.gif)
+![start](https://www.dropbox.com/s/ddtbw9jt640zand/start.gif?raw=1)
 
 * Download and open **Destroyer**.
 * Drop your music collection onto **Destroyer**.
@@ -37,7 +37,7 @@
 
 ## On Search:
 
-![search](http://destroyer.audio/static/search.gif)
+![search](https://www.dropbox.com/s/qh218t53t38ahvq/search.gif?raw=1)
 
 * Type anywhere in the library view to filter your collection.
 * `esc` will clear your filter.
