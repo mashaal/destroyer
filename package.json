@@ -10,10 +10,8 @@
     "build": "NODE_ENV=development webpack --progress",
     "build:watch": "yarn run build -- --watch",
     "start": "electron index.js",
-    "pack:osx":
-      "rm -rf Destroyer-darwin-x64 && NODE_ENV=production webpack --progress -p && electron-packager ./ Destroyer --platform=darwin --arch=x64 --icon=icons.icns --prune",
-    "pack:win":
-      "NODE_ENV=production webpack --progress -p && electron-packager ./ Destroyer --out=dist/windows --platform=win32 --arch=x64 --overwrite --icon=icons.ico --prune"
+    "pack:osx": "rm -rf Destroyer-darwin-x64 && NODE_ENV=production webpack --progress -p && electron-packager ./ Destroyer --platform=darwin --arch=x64 --icon=icons.icns --prune",
+    "pack:win": "NODE_ENV=production webpack --progress -p && electron-packager ./ Destroyer --out=dist/windows --platform=win32 --arch=x64 --overwrite --icon=icons.ico --prune"
   },
   "author": "omar mashaal",
   "license": "ISC",
@@ -27,9 +25,9 @@
     "leftpad": "0.0.0",
     "musicmetadata": "^2.0.5",
     "radium": "^0.18.2",
-    "react": "^15.4.2",
+    "react": "^16.14.0",
     "react-addons-shallow-compare": "^15.4.2",
-    "react-dom": "^15.4.2",
+    "react-dom": "^16.14.0",
     "redux": "^3.6.0",
     "scroll-animator": "^1.1.0",
     "walk": "^2.3.9"
@@ -58,11 +56,21 @@
     "webpack": "^2.3.2"
   },
   "babel": {
-    "presets": ["es2015", "stage-0", "react"],
-    "plugins": ["transform-runtime", "transform-decorators-legacy"]
+    "presets": [
+      "es2015",
+      "stage-0",
+      "react"
+    ],
+    "plugins": [
+      "transform-runtime",
+      "transform-decorators-legacy"
+    ]
   },
   "eslintConfig": {
     "parser": "babel-eslint",
-    "extends": ["standard", "standard-react"]
+    "extends": [
+      "standard",
+      "standard-react"
+    ]
   }
 }
