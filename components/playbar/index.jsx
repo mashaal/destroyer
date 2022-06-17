@@ -1,10 +1,8 @@
 import React, { Component } from 'react'
-import Radium from 'radium'
 import ReactDOM from 'react-dom'
 import shallowCompare from 'react-addons-shallow-compare'
 import { rafThrottle } from '../utilities'
 
-@Radium
 export default class Playbar extends Component {
   constructor() {
     super()

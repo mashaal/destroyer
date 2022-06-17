@@ -1,5 +1,4 @@
 import React from 'react'
-import Radium from 'radium'
 
 const Input = props => (
   <div style={styles.base}>
@@ -17,7 +16,7 @@ const Input = props => (
   </div>
 )
 
-export default Radium(Input)
+export default Input
 
 const styles = {
   base: {

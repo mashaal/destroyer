@@ -1,12 +1,10 @@
 import React, { Component } from 'react'
-import Radium, { keyframes } from 'radium'
 import { store } from '../../client.js'
 import shallowCompare from 'react-addons-shallow-compare'
 import Track from './track.jsx'
 import close from './close.png'
 import play from './play.png'
 
-@Radium
 export default class Showcase extends Component {
   shouldComponentUpdate = (nextProps, nextState) => {
     return shallowCompare(this, nextProps, nextState)
@@ -56,14 +54,14 @@ export default class Showcase extends Component {
   }
 }
 
-const rotateKeyframes = keyframes({
+const rotateKeyframes = {
   from: {
     transform: 'rotateY(-20deg)'
   },
   to: {
     transform: 'rotateY(20deg)'
   }
-})
+}
 
 const styles = {
   showcase: {

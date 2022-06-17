@@ -1,12 +1,10 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
-import Radium from 'radium'
 import { store } from '../../client.js'
 import { rafThrottle } from '../utilities'
 import shallowCompare from 'react-addons-shallow-compare'
 import inView from 'in-view'
 
-@Radium
 export default class Album extends Component {
   constructor(props) {
     super()

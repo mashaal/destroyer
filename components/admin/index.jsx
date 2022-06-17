@@ -1,9 +1,7 @@
 import React, { Component } from 'react'
 import { store } from '../../client.js'
 import Local from '../connection/local.js'
-import Radium from 'radium'
 
-@Radium
 export default class Admin extends Component {
   constructor() {
     super()

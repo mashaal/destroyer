@@ -1,5 +1,4 @@
 import React from 'react'
-import Radium from 'radium'
 import { store } from '../../client.js'
 
 const CloseButton = props => (
@@ -17,7 +16,7 @@ const CloseButton = props => (
   </div>
 )
 
-export default Radium(CloseButton)
+export default CloseButton
 
 const styles = {
   base: {

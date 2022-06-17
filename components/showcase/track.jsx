@@ -1,9 +1,7 @@
 import React, { Component } from 'react'
-import Radium from 'radium'
 import leftpad from 'leftpad'
 import { store } from '../../client.js'
 
-@Radium
 export default class Track extends Component {
   handleClick = () => {
     window.player.playTrack(this.props.track)

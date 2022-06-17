@@ -1,5 +1,4 @@
 import React from 'react'
-import Radium from 'radium'
 
 const Loading = props => (
   <section
@@ -9,7 +8,7 @@ const Loading = props => (
   </section>
 )
 
-export default Radium(Loading)
+export default Loading
 
 const styles = {
   base: {

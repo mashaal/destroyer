@@ -1,11 +1,9 @@
 import React, { Component } from 'react'
 import key from 'key'
-import Radium from 'radium'
 import shallowCompare from 'react-addons-shallow-compare'
 import CloseButton from '../close-button'
 import { store } from '../../client.js'
 
-@Radium
 export default class Search extends Component {
   constructor() {
     super()

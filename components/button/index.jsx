@@ -1,5 +1,4 @@
 import React from 'react'
-import Radium from 'radium'
 
 const Button = props => (
   <button
@@ -42,4 +41,4 @@ const styles = {
   }
 }
 
-export default Radium(Button)
+export default Button

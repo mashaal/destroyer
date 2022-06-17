@@ -1,5 +1,4 @@
 import React from 'react'
-import Radium from 'radium'
 
 const Status = props => (
   <figure
@@ -14,7 +13,7 @@ const Status = props => (
   </figure>
 )
 
-export default Radium(Status)
+export default Status
 
 const styles = {
   status: {

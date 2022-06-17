@@ -24,7 +24,6 @@
     "key": "^0.1.11",
     "leftpad": "0.0.0",
     "musicmetadata": "^2.0.5",
-    "radium": "^0.18.2",
     "react": "^16.14.0",
     "react-addons-shallow-compare": "^15.4.2",
     "react-dom": "^16.14.0",
