@@ -32,14 +32,11 @@
     "walk": "^2.3.9"
   },
   "devDependencies": {
-    "babel-core": "^6.24.0",
-    "babel-eslint": "^7.2.1",
-    "babel-loader": "^6.4.1",
-    "babel-plugin-transform-runtime": "^6.23.0",
-    "babel-polyfill": "^6.23.0",
-    "babel-preset-es2015": "^6.24.0",
-    "babel-preset-react": "^6.23.0",
-    "babel-preset-stage-0": "^6.22.0",
+    "@babel/core": "^7.18.5",
+    "@babel/eslint-parser": "^7.18.2",
+    "@babel/preset-env": "^7.18.2",
+    "@babel/preset-react": "^7.17.12",
+    "babel-loader": "^8.2.5",
     "electron-packager": "^8.6.0",
     "eslint": "^3.19.0",
     "eslint-config-standard": "^7.1.0",
@@ -55,19 +52,18 @@
   },
   "babel": {
     "presets": [
-      "es2015",
-      "stage-0",
-      "react"
-    ],
-    "plugins": [
-      "transform-runtime"
+      "@babel/preset-env",
+      "@babel/preset-react"
     ]
   },
   "eslintConfig": {
-    "parser": "babel-eslint",
+    "parser": "@babel/eslint-parser",
     "extends": [
       "standard",
       "standard-react"
     ]
-  }
+  },
+  "browserslist": [
+    "electron 1.6.5"
+  ]
 }
