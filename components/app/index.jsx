@@ -1,4 +1,3 @@
-import React from 'react'
 import Loading from '../loading'
 import Admin from '../admin'
 import Bar from '../bar'

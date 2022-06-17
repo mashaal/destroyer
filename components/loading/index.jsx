@@ -1,5 +1,3 @@
-import React from 'react'
-
 const Loading = props => (
   <section
     style={[styles.base, props.loading.display ? styles.show : styles.hide]}

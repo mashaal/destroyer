@@ -1,5 +1,3 @@
-import React from 'react'
-
 const Input = props => (
   <div style={styles.base}>
     <div style={{ padding: '0 .5em' }}>

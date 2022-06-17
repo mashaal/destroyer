@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import { Component } from 'react'
 import leftpad from 'leftpad'
 import { store } from '../../client.js'
 

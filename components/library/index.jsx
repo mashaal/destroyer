@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import { Component } from 'react'
 import Album from './album.jsx'
 import shallowCompare from 'react-addons-shallow-compare'
 import { store } from '../../client.js'

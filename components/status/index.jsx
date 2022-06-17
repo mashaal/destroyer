@@ -1,5 +1,3 @@
-import React from 'react'
-
 const Status = props => (
   <figure
     style={[styles.status, props.status.display ? styles.show : styles.hide]}

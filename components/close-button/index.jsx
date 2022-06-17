@@ -1,4 +1,3 @@
-import React from 'react'
 import { store } from '../../client.js'
 
 const CloseButton = props => (

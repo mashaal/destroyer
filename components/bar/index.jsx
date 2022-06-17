@@ -1,5 +1,3 @@
-import React from 'react'
-
 const Bar = () => <nav style={styles.base} />
 
 export default Bar

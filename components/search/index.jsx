@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import { Component } from 'react'
 import key from 'key'
 import shallowCompare from 'react-addons-shallow-compare'
 import CloseButton from '../close-button'

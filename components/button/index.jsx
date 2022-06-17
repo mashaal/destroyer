@@ -1,5 +1,3 @@
-import React from 'react'
-
 const Button = props => (
   <button
     style={[styles.base, props.disabled && styles.disabled]}

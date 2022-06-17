@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import { Component } from 'react'
 import { store } from '../../client.js'
 import shallowCompare from 'react-addons-shallow-compare'
 import Track from './track.jsx'
