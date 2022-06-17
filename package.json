@@ -16,6 +16,7 @@
   "author": "omar mashaal",
   "license": "ISC",
   "dependencies": {
+    "@emotion/react": "^11.9.3",
     "date-fns": "^1.28.2",
     "electron": "^1.6.5",
     "electron-window-state": "^4.1.0",
@@ -36,6 +37,7 @@
     "@babel/eslint-parser": "^7.18.2",
     "@babel/preset-env": "^7.18.2",
     "@babel/preset-react": "^7.17.12",
+    "@emotion/babel-plugin": "^11.9.2",
     "babel-loader": "^8.2.5",
     "electron-packager": "^8.6.0",
     "eslint": "^3.19.0",
@@ -53,8 +55,15 @@
   "babel": {
     "presets": [
       "@babel/preset-env",
-      ["@babel/preset-react", { "runtime": "automatic" }]
-    ]
+      [
+        "@babel/preset-react",
+        {
+          "runtime": "automatic",
+          "importSource": "@emotion/react"
+        }
+      ]
+    ],
+    "plugins": ["@emotion/babel-plugin"]
   },
   "eslintConfig": {
     "parser": "@babel/eslint-parser",

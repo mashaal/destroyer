@@ -1,4 +1,4 @@
-const Bar = () => <nav style={styles.base} />
+const Bar = () => <nav css={styles.base} />
 
 export default Bar
 

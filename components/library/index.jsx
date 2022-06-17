@@ -16,7 +16,7 @@ export default class Library extends Component {
     return (
       <ul
         ref="library"
-        style={[
+        css={[
           styles.base,
           this.props.player.track
             ? { padding: '12.5vh 0 33vh' }
@@ -34,16 +34,16 @@ export default class Library extends Component {
               />
             )
         })}
-        <li style={styles.li} />
-        <li style={styles.li} />
-        <li style={styles.li} />
-        <li style={styles.li} />
-        <li style={styles.li} />
-        <li style={styles.li} />
-        <li style={styles.li} />
-        <li style={styles.li} />
-        <li style={styles.li} />
-        <li style={styles.li} />
+        <li css={styles.li} />
+        <li css={styles.li} />
+        <li css={styles.li} />
+        <li css={styles.li} />
+        <li css={styles.li} />
+        <li css={styles.li} />
+        <li css={styles.li} />
+        <li css={styles.li} />
+        <li css={styles.li} />
+        <li css={styles.li} />
       </ul>
     )
   }

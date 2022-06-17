@@ -1,3 +1,4 @@
+import { Global } from '@emotion/react'
 import Loading from '../loading'
 import Admin from '../admin'
 import Bar from '../bar'
@@ -8,7 +9,8 @@ import Showcase from '../showcase'
 import Playbar from '../playbar'
 
 const App = props => (
-  <main>  
+  <main>
+    <Global styles={styles} />
     <Bar />
     <Admin admin={props.admin} />
     <Library library={props.library} player={props.player} />

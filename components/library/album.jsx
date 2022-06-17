@@ -48,18 +48,18 @@ export default class Album extends Component {
         onClick={this.handleClick}
         onMouseOver={this.activate}
         onMouseOut={this.reset}
-        style={[
+        css={[
           styles.base,
           this.props.newest ? { order: this.props.album.time } : { order: -2 }
         ]}
       >
-        <div style={this.state.fade ? styles.fade : styles.nonfade}>
+        <div css={this.state.fade ? styles.fade : styles.nonfade}>
           <div
             ref="album"
-            style={[styles.cover, cover, this.state.active ? styles.zoom : '']}
+            css={[styles.cover, cover, this.state.active ? styles.zoom : '']}
           />
         </div>
-        <span style={[this.state.active ? styles.active : '']}>
+        <span css={[this.state.active ? styles.active : '']}>
           {this.props.album.artist + ' - ' + this.props.album.title}
         </span>
       </li>

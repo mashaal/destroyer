@@ -1,8 +1,8 @@
 const Loading = props => (
   <section
-    style={[styles.base, props.loading.display ? styles.show : styles.hide]}
+    css={[styles.base, props.loading.display ? styles.show : styles.hide]}
   >
-    <span style={styles.span}>{props.loading.message}</span>
+    <span css={styles.span}>{props.loading.message}</span>
   </section>
 )
 

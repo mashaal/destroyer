@@ -1,4 +1,5 @@
 import { Component } from 'react'
+import { keyframes } from '@emotion/react'
 import { store } from '../../client.js'
 import shallowCompare from 'react-addons-shallow-compare'
 import Track from './track.jsx'
@@ -22,22 +23,22 @@ export default class Showcase extends Component {
       }
     return (
       <section
-        style={[
+        css={[
           styles.showcase,
           this.props.showcase.display ? styles.show : styles.hide
         ]}
       >
         <figure
-          style={[
+          css={[
             styles.figure,
             this.props.showcase.display ? styles.top : styles.bottom
           ]}
           onClick={this.handleClick}
         >
-          <article style={[styles.article, cover]} />
+          <article css={[styles.article, cover]} />
         </figure>
         <ol
-          style={[styles.ol, this.props.showcase.display ? styles.slide : '']}
+          css={[styles.ol, this.props.showcase.display ? styles.slide : '']}
         >
           {this.props.showcase.tracks.map((track, index) => {
             if (
@@ -54,14 +55,14 @@ export default class Showcase extends Component {
   }
 }
 
-const rotateKeyframes = {
+const rotateKeyframes = keyframes({
   from: {
     transform: 'rotateY(-20deg)'
   },
   to: {
     transform: 'rotateY(20deg)'
   }
-}
+})
 
 const styles = {
   showcase: {

@@ -1,12 +1,12 @@
 const Status = props => (
   <figure
-    style={[styles.status, props.status.display ? styles.show : styles.hide]}
+    css={[styles.status, props.status.display ? styles.show : styles.hide]}
   >
     <div>
-      <h1 style={styles.h1}>{props.status.artist}</h1>
-      <h2 style={styles.h2}>{props.status.title}</h2>
-      <h3 style={styles.h3}>{props.status.album}</h3>
-      <h4 style={styles.h4}>- 00:00:00</h4>
+      <h1 css={styles.h1}>{props.status.artist}</h1>
+      <h2 css={styles.h2}>{props.status.title}</h2>
+      <h3 css={styles.h3}>{props.status.album}</h3>
+      <h4 css={styles.h4}>- 00:00:00</h4>
     </div>
   </figure>
 )

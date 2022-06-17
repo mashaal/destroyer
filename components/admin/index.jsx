@@ -48,7 +48,7 @@ export default class Admin extends Component {
   render() {
     return (
       <figure
-        style={[
+        css={[
           styles.drop,
           this.props.admin.display || this.state.dragging
             ? styles.show
@@ -61,7 +61,7 @@ export default class Admin extends Component {
         onDragLeave={this.handleDragLeave}
         onDrop={this.handleDrop}
       >
-        <span style={styles.span}>Drop music collection here</span>
+        <span css={styles.span}>Drop music collection here</span>
       </figure>
     )
   }

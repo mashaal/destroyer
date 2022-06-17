@@ -38,14 +38,14 @@ export default class Playbar extends Component {
   render() {
     return (
       <div
-        style={[
+        css={[
           styles.playbar,
           this.props.playbar.display ? styles.show : styles.hide
         ]}
       >
         <audio id="xxx" />
         <div
-          style={{
+          css={{
             position: 'relative',
             height: 40,
             width: '100%',
@@ -56,24 +56,24 @@ export default class Playbar extends Component {
           onMouseLeave={() => this.setState({ hover: false })}
           onClick={this.scan}
         >
-          <div data-range style={styles.range} />
-          <div data-buffer style={styles.buffer} />
+          <div data-range css={styles.range} />
+          <div data-buffer css={styles.buffer} />
           <div
-            style={[
+            css={[
               styles.slider,
               this.state.hover ? { opacity: 1 } : { opacity: 0 },
               { transform: `translateX(${this.state.left}px)` || 0 }
             ]}
           />
         </div>
-        <div style={styles.panel}>
-          <span style={styles.span} key="previous" onClick={this.previous}>
+        <div css={styles.panel}>
+          <span css={styles.span} key="previous" onClick={this.previous}>
             previous
           </span>
-          <span style={styles.span} key="toggle" onClick={this.toggle}>
+          <span css={styles.span} key="toggle" onClick={this.toggle}>
             {this.props.playbar.toggle}
           </span>
-          <span style={styles.span} key="next" onClick={this.next}>
+          <span css={styles.span} key="next" onClick={this.next}>
             next
           </span>
         </div>
