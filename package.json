@@ -18,7 +18,7 @@
   "dependencies": {
     "@emotion/react": "^11.9.3",
     "date-fns": "^1.28.2",
-    "electron": "^1.6.5",
+    "electron": "^5.0.13",
     "electron-window-state": "^4.1.0",
     "fuzzy-search": "^1.4.0",
     "in-view": "^0.6.1",
@@ -58,6 +58,6 @@
     ]
   },
   "browserslist": [
-    "electron 1.6.5"
+    "electron 5.0.13"
   ]
 }
