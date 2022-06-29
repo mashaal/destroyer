@@ -32,10 +32,12 @@ const config = {
         }
       },
       {
-        test: /\.(png|woff|woff2)$/,
-        use: {
-          loader: 'url-loader'
-        }
+        test: /\.(woff|woff2)$/,
+        type: 'asset/resource'
+      },
+      {
+        test: /\.png$/,
+        type: 'asset/inline'
       },
     ],
   },
