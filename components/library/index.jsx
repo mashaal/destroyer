@@ -1,10 +1,8 @@
-import React, { Component } from 'react'
+import { Component } from 'react'
 import Album from './album.jsx'
-import Radium from 'radium'
 import shallowCompare from 'react-addons-shallow-compare'
 import { store } from '../../client.js'
 
-@Radium
 export default class Library extends Component {
   componentDidMount() {
     if (localStorage.getItem('newest') === 'true')
@@ -18,7 +16,7 @@ export default class Library extends Component {
     return (
       <ul
         ref="library"
-        style={[
+        css={[
           styles.base,
           this.props.player.track
             ? { padding: '12.5vh 0 33vh' }
@@ -36,16 +34,16 @@ export default class Library extends Component {
               />
             )
         })}
-        <li style={styles.li} />
-        <li style={styles.li} />
-        <li style={styles.li} />
-        <li style={styles.li} />
-        <li style={styles.li} />
-        <li style={styles.li} />
-        <li style={styles.li} />
-        <li style={styles.li} />
-        <li style={styles.li} />
-        <li style={styles.li} />
+        <li css={styles.li} />
+        <li css={styles.li} />
+        <li css={styles.li} />
+        <li css={styles.li} />
+        <li css={styles.li} />
+        <li css={styles.li} />
+        <li css={styles.li} />
+        <li css={styles.li} />
+        <li css={styles.li} />
+        <li css={styles.li} />
       </ul>
     )
   }

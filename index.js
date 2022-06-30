@@ -29,11 +29,15 @@ const createWindow = () => {
     darkTheme: true,
     show: false,
     webPreferences: {
-      backgroundThrottling: false
+      backgroundThrottling: false,
+      contextIsolation: false,
+      enableRemoteModule: true,
+      nodeIntegration: true,
+      worldSafeExecuteJavaScript: false
     }
   })
   mainWindowState.manage(mainWindow)
-  mainWindow.loadURL(`file://${__dirname}/components/app/index.html`)
+  mainWindow.loadFile(`${__dirname}/components/app/index.html`)
   mainWindow.setTouchBar(touchBar)
   mainWindow.once('ready-to-show', () => {
     mainWindow.show()
@@ -43,7 +47,7 @@ const createWindow = () => {
   })
 }
 
-app.on('ready', createWindow)
+app.whenReady().then(createWindow)
 
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {

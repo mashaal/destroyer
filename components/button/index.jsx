@@ -1,9 +1,6 @@
-import React from 'react'
-import Radium from 'radium'
-
 const Button = props => (
   <button
-    style={[styles.base, props.disabled && styles.disabled]}
+    css={[styles.base, props.disabled && styles.disabled]}
     type={props.type}
     onClick={props.callback}
     disabled={props.disabled}
@@ -42,4 +39,4 @@ const styles = {
   }
 }
 
-export default Radium(Button)
+export default Button

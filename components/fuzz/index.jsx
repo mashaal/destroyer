@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import { Component } from 'react'
 import ReactDOM from 'react-dom'
 const paper = require('paper/dist/paper-full')
 
@@ -61,7 +61,7 @@ export default class Fuzz extends Component {
         id="oscilloscope"
         height="100%"
         width="100%"
-        style={{
+        css={{
           opacity: 0.8,
           width: '100%',
           pointerEvents: 'none',

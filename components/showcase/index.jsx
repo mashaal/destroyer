@@ -1,12 +1,11 @@
-import React, { Component } from 'react'
-import Radium, { keyframes } from 'radium'
+import { Component } from 'react'
+import { keyframes } from '@emotion/react'
 import { store } from '../../client.js'
 import shallowCompare from 'react-addons-shallow-compare'
 import Track from './track.jsx'
 import close from './close.png'
 import play from './play.png'
 
-@Radium
 export default class Showcase extends Component {
   shouldComponentUpdate = (nextProps, nextState) => {
     return shallowCompare(this, nextProps, nextState)
@@ -24,22 +23,22 @@ export default class Showcase extends Component {
       }
     return (
       <section
-        style={[
+        css={[
           styles.showcase,
           this.props.showcase.display ? styles.show : styles.hide
         ]}
       >
         <figure
-          style={[
+          css={[
             styles.figure,
             this.props.showcase.display ? styles.top : styles.bottom
           ]}
           onClick={this.handleClick}
         >
-          <article style={[styles.article, cover]} />
+          <article css={[styles.article, cover]} />
         </figure>
         <ol
-          style={[styles.ol, this.props.showcase.display ? styles.slide : '']}
+          css={[styles.ol, this.props.showcase.display ? styles.slide : '']}
         >
           {this.props.showcase.tracks.map((track, index) => {
             if (

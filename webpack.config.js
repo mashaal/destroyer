@@ -1,45 +1,49 @@
 const path = require('path')
-const webpack = require('webpack')
 
 const config = {
-  entry: [path.join(__dirname, '/client.js')],
+  entry: './client.js',
   output: {
-    path: path.join(__dirname, '/bundle'),
+    path: path.join(__dirname, 'bundle'),
     publicPath: '/bundle/',
     filename: 'destroyer.js'
   },
-  target: 'electron',
+  target: 'electron-renderer',
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
-        loader: 'babel-loader',
-        query: {
-          cacheDirectory: true
+        use: {
+          loader: 'babel-loader',
+          options: {
+            cacheDirectory: true,
+            presets: [
+              '@babel/preset-env',
+              [
+                '@babel/preset-react',
+                {
+                  runtime: 'automatic',
+                  importSource: '@emotion/react'
+                }
+              ]
+            ],
+            plugins: ["@emotion/babel-plugin"]
+          }
         }
       },
       {
-        test: /\.(svg|png|jpg|webm|mp4|woff|woff2)$/,
-        loader: 'url-loader'
-      }
-    ]
+        test: /\.(woff|woff2)$/,
+        type: 'asset/resource'
+      },
+      {
+        test: /\.png$/,
+        type: 'asset/inline'
+      },
+    ],
   },
   resolve: {
     extensions: ['.js', '.jsx']
-  },
-  plugins: [new webpack.EnvironmentPlugin(['NODE_ENV'])]
-}
-
-if (process.env.NODE_ENV === 'production') {
-  config.plugins.push(
-    new webpack.optimize.UglifyJsPlugin({
-      comments: false
-    })
-  )
-} else {
-  config.devtool = 'eval'
-  config.plugins.push(new webpack.NoErrorsPlugin())
+  }
 }
 
 module.exports = config

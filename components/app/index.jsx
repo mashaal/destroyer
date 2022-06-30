@@ -1,4 +1,4 @@
-import React from 'react'
+import { Global } from '@emotion/react'
 import Loading from '../loading'
 import Admin from '../admin'
 import Bar from '../bar'
@@ -7,11 +7,10 @@ import Status from '../status'
 import Library from '../library'
 import Showcase from '../showcase'
 import Playbar from '../playbar'
-import Radium, { StyleRoot, Style } from 'radium'
 
 const App = props => (
-  <StyleRoot>
-    <Style rules={styles} />
+  <main>
+    <Global styles={styles} />
     <Bar />
     <Admin admin={props.admin} />
     <Library library={props.library} player={props.player} />
@@ -24,10 +23,10 @@ const App = props => (
       admin={props.admin}
       metadata={props.metadata}
     />
-  </StyleRoot>
+  </main>
 )
 
-export default Radium(App)
+export default App
 
 const styles = {
   html: {

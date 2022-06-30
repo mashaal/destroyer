@@ -1,11 +1,9 @@
-import React, { Component } from 'react'
+import { Component } from 'react'
 import key from 'key'
-import Radium from 'radium'
 import shallowCompare from 'react-addons-shallow-compare'
 import CloseButton from '../close-button'
 import { store } from '../../client.js'
 
-@Radium
 export default class Search extends Component {
   constructor() {
     super()
@@ -33,7 +31,7 @@ export default class Search extends Component {
   render() {
     return (
       <form
-        style={[
+        css={[
           styles.search,
           this.props.search.display ? styles.show : styles.hide
         ]}
@@ -43,7 +41,7 @@ export default class Search extends Component {
           ref="search"
           type="text"
           value={this.props.search.input}
-          style={styles.input}
+          css={styles.input}
           onChange={this.handleSearch}
         />
       </form>

@@ -1,13 +1,10 @@
-import React from 'react'
-import Radium from 'radium'
-
 const Input = props => (
-  <div style={styles.base}>
-    <div style={{ padding: '0 .5em' }}>
-      {props.label && <label style={styles.label}>{props.label}</label>}
+  <div css={styles.base}>
+    <div css={{ padding: '0 .5em' }}>
+      {props.label && <label css={styles.label}>{props.label}</label>}
       <input
         type={props.type || 'text'}
-        style={styles.input}
+        css={styles.input}
         required={props.required}
         value={props.value}
         onChange={props.onChange}
@@ -17,7 +14,7 @@ const Input = props => (
   </div>
 )
 
-export default Radium(Input)
+export default Input
 
 const styles = {
   base: {

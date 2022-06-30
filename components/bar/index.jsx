@@ -1,9 +1,6 @@
-import React from 'react'
-import Radium from 'radium'
+const Bar = () => <nav css={styles.base} />
 
-const Bar = () => <nav style={styles.base} />
-
-export default Radium(Bar)
+export default Bar
 
 const styles = {
   base: {
