@@ -30,7 +30,10 @@ const createWindow = () => {
     show: false,
     webPreferences: {
       backgroundThrottling: false,
-      nodeIntegration: true
+      contextIsolation: false,
+      enableRemoteModule: true,
+      nodeIntegration: true,
+      worldSafeExecuteJavaScript: false
     }
   })
   mainWindowState.manage(mainWindow)
